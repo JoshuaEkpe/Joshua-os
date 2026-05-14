@@ -1,0 +1,2603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07060A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Joshua OS">
+<meta name="description" content="Life Command Center for Trader & Entrepreneur Joshua Ekpe">
+<!-- PWA: Real manifest file (required for browser install prompt) -->
+<link rel="manifest" href="/manifest.json">
+<!-- iOS icons (Safari doesn't use manifest icons) -->
+<link rel="apple-touch-icon" href="/icon-192.png">
+<link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+<link rel="apple-touch-icon" sizes="512x512" href="/icon-512.png">
+<title>Joshua Empire OS</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#C9A84C;--gold2:#E8C96A;--gold3:#8a6f32;--gold4:#3a2e10;
+  --bg:#07060A;--bg2:#0f0e14;--bg3:#161520;--bg4:#1e1d28;--bg5:#252433;
+  --border:#1e1d28;--border2:#2a2940;--borderg:#2e2510;
+  --text:#ede8f5;--text2:#9994b0;--text3:#504d68;
+  --green:#3dcc8a;--gdim:#0d2e1e;--red:#e05555;--rdim:#2e0d0d;
+  --blue:#5588dd;--bdim:#0d1e3a;--amber:#e8a84c;--adim:#2e1e0d;
+  --purple:#9b72cf;--pdim:#1e0d3a;
+  --r:10px;--rl:16px;--rxl:24px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--gold3);border-radius:2px}
+
+/* SIDEBAR */
+.sb{position:fixed;top:0;left:0;width:230px;height:100vh;background:var(--bg2);border-right:1px solid var(--border2);display:flex;flex-direction:column;z-index:100;overflow-y:auto;transition:transform .3s}
+.sb-logo{padding:26px 22px 18px;border-bottom:1px solid var(--border2);background:linear-gradient(135deg,#0f0e14,#130f08)}
+.sb-lion{font-size:30px;margin-bottom:6px}
+.sb-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--gold);letter-spacing:.04em;line-height:1.1}
+.sb-sub{font-size:9px;color:var(--text3);letter-spacing:.18em;text-transform:uppercase;margin-top:4px}
+.sb-nav{padding:10px 0;flex:1}
+.nav-grp{padding:12px 22px 4px;font-size:9px;color:var(--text3);letter-spacing:.18em;text-transform:uppercase}
+.nav-i{display:flex;align-items:center;gap:10px;padding:9px 22px;cursor:pointer;font-size:12px;color:var(--text2);transition:all .15s;border-left:2px solid transparent}
+.nav-i:hover{background:var(--bg3);color:var(--text)}
+.nav-i.on{background:linear-gradient(90deg,var(--gold4),transparent);color:var(--gold);border-left-color:var(--gold)}
+.nav-i .ic{font-size:14px;width:20px;text-align:center}
+.sb-quote{padding:16px 22px;border-top:1px solid var(--border2);font-family:'Playfair Display',serif;font-size:11px;font-style:italic;color:var(--text3);line-height:1.6}
+.sb-quote span{color:var(--gold);display:block;margin-top:4px;font-size:10px}
+
+/* MAIN */
+.main{margin-left:230px;min-height:100vh}
+
+/* TOPBAR */
+.topbar{background:linear-gradient(135deg,#0c0b12 0%,#110d06 50%,#0c0b12 100%);border-bottom:1px solid var(--borderg);padding:16px 30px;display:flex;align-items:center;gap:20px;position:sticky;top:0;z-index:50}
+.tb-left{flex:1}
+.tb-name{font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--gold);letter-spacing:.06em;line-height:1}
+.tb-role{font-size:9px;color:var(--text3);letter-spacing:.18em;text-transform:uppercase;margin-top:3px}
+.tb-quote{font-family:'Playfair Display',serif;font-size:11px;font-style:italic;color:var(--text2);margin-top:5px}
+.tb-clock{text-align:center}
+.tb-time{font-family:'JetBrains Mono',monospace;font-size:36px;font-weight:500;color:var(--gold);line-height:1}
+.tb-date{font-size:10px;color:var(--text3);margin-top:4px;letter-spacing:.06em}
+.tb-right{text-align:right;min-width:170px}
+.tb-season-lbl{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.12em}
+.tb-season{font-size:13px;color:var(--gold2);font-weight:600;margin-top:3px}
+.tb-prog-wrap{margin-top:8px}
+.tb-prog-labels{display:flex;justify-content:space-between;font-size:9px;color:var(--text3);margin-bottom:3px}
+.tb-prog-track{background:var(--bg4);border-radius:2px;height:3px;overflow:hidden}
+.tb-prog-fill{height:100%;background:linear-gradient(90deg,var(--gold3),var(--gold));border-radius:2px;transition:width 1.5s ease}
+
+/* CONTENT */
+.content{padding:26px 30px}
+.sec{display:none}.sec.on{display:block;animation:fi .3s ease}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+
+/* GRIDS */
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:14px}
+.g-hero{display:grid;grid-template-columns:1fr 1fr 290px;gap:16px;margin-bottom:16px}
+
+/* CARD */
+.card{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--rl);padding:16px 18px;position:relative;overflow:hidden}
+.card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold3),transparent);opacity:.4}
+.card-g{border-color:var(--borderg)}.card-r{border-color:#2e0d0d}
+.clbl{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.15em;margin-bottom:7px}
+.cval{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--text);line-height:1}
+.cval.g{color:var(--gold)}.cval.gr{color:var(--green)}.cval.r{color:var(--red)}
+.csub{font-size:11px;color:var(--text3);margin-top:4px}
+
+/* SECTION HEADER */
+.sh{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.sh-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--gold)}
+.sh-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border2),transparent)}
+.sh-badge{font-size:9px;padding:3px 10px;border-radius:20px;background:var(--bg4);color:var(--text3);border:1px solid var(--border2)}
+
+/* BADGE */
+.bdg{display:inline-block;font-size:9px;padding:3px 8px;border-radius:20px;font-weight:500}
+.bdg-g{background:var(--gdim);color:var(--green)}.bdg-r{background:var(--rdim);color:var(--red)}
+.bdg-gold{background:#2e2008;color:var(--gold)}.bdg-b{background:var(--bdim);color:var(--blue)}
+.bdg-a{background:var(--adim);color:var(--amber)}
+
+/* PROGRESS */
+.prog-wrap{margin-top:10px}
+.prog-track{background:var(--bg4);border-radius:2px;height:4px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--gold3),var(--gold));border-radius:2px}
+
+/* TABS */
+.tabs{display:flex;gap:2px;margin-bottom:16px;border-bottom:1px solid var(--border2)}
+.tab-b{padding:8px 16px;font-size:11px;cursor:pointer;color:var(--text3);border-bottom:2px solid transparent;transition:all .15s;background:none;border-top:none;border-left:none;border-right:none;font-family:'Inter',sans-serif}
+.tab-b.on{color:var(--gold);border-bottom-color:var(--gold)}
+.tab-b:hover{color:var(--text2)}
+.tab-c{display:none}.tab-c.on{display:block}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{text-align:left;padding:8px 10px;color:var(--text3);font-weight:500;border-bottom:1px solid var(--border2);font-size:9px;text-transform:uppercase;letter-spacing:.1em}
+.tbl td{padding:9px 10px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:middle}
+.tbl tr:hover td{background:var(--bg3)}
+.tbl-wrap{overflow-x:auto}
+
+/* ACCOUNT CARD */
+.acc-card{background:var(--bg3);border:1px solid var(--borderg);border-radius:var(--rl);padding:18px;position:relative;overflow:hidden}
+.acc-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--gold),var(--gold3))}
+.acc-name{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.acc-eq{font-family:'Playfair Display',serif;font-size:24px;color:var(--gold);font-weight:700}
+.acc-pnl{font-size:12px;margin-top:4px}
+.acc-status{display:inline-block;font-size:9px;padding:3px 9px;border-radius:20px;margin-top:6px;text-transform:uppercase;letter-spacing:.05em}
+.s-live{background:var(--gdim);color:var(--green)}.s-ch{background:var(--adim);color:var(--amber)}
+
+/* HABIT TRACKER */
+.hb-row{display:grid;grid-template-columns:130px repeat(7,1fr);gap:3px;margin-bottom:3px;align-items:center}
+.hb-lbl{font-size:10px;color:var(--text2)}
+.hb-day{text-align:center;font-size:9px;color:var(--text3);text-transform:uppercase}
+.hb-cell{aspect-ratio:1;border-radius:4px;border:1px solid var(--border2);background:var(--bg3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;transition:all .15s}
+.hb-cell.done{background:var(--gdim);border-color:var(--green);color:var(--green)}
+.hb-cell.miss{background:var(--rdim);border-color:var(--red);color:var(--red)}
+
+/* GATE */
+.gate{display:flex;gap:10px;padding:10px 12px;border-radius:var(--r);border:1px solid var(--border2);background:var(--bg3);margin-bottom:6px;cursor:pointer;transition:all .15s}
+.gate:hover{border-color:var(--gold3)}
+.gate.on{border-color:var(--green);background:var(--gdim)}
+.gate.kill-i{border-color:#2e1505;background:#1a0d03}
+.gate.kill-i.trig{border-color:var(--red);background:var(--rdim)}
+.gate-box{width:18px;height:18px;border-radius:3px;border:1px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;background:var(--bg4)}
+.gate.on .gate-box{background:var(--green);border-color:var(--green);color:#000}
+.gate.kill-i.trig .gate-box{background:var(--red);border-color:var(--red);color:#fff}
+.gate-txt{font-size:11px;color:var(--text2);line-height:1.4;flex:1}
+.gate.on .gate-txt{color:var(--green)}
+.gate-sub{font-size:10px;color:var(--text3);margin-top:2px}
+.gate-sec-lbl{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.12em;margin:12px 0 6px}
+.verdict{text-align:center;padding:10px;border-radius:var(--r);font-size:12px;font-weight:500;margin-top:10px;display:none}
+.verdict.on{display:block}
+.verdict.pass{background:var(--gdim);color:var(--green);border:1px solid var(--green)}
+.verdict.fail{background:var(--rdim);color:var(--red);border:1px solid var(--red)}
+
+/* DAILY CHECK */
+.dc-item{display:flex;gap:9px;align-items:center;padding:7px 0;border-bottom:1px solid var(--border);cursor:pointer}
+.dc-box{width:16px;height:16px;border-radius:3px;border:1px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px}
+.dc-txt{font-size:11px;color:var(--text2)}
+
+/* EMOTION */
+.em-track{display:flex;gap:3px;margin-top:8px}
+.em-btn{flex:1;padding:7px 3px;text-align:center;border-radius:4px;border:1px solid var(--border2);font-size:11px;cursor:pointer;transition:all .15s;background:var(--bg3);color:var(--text3)}
+.em-btn:hover{border-color:var(--gold3);color:var(--gold)}
+.em-btn.on{background:var(--gold);color:#000;border-color:var(--gold)}
+.em-res{margin-top:8px;padding:8px 12px;border-radius:var(--r);font-size:12px;text-align:center;display:none}
+.em-res.on{display:block}
+.em-res.trade{background:var(--gdim);color:var(--green);border:1px solid var(--green)}
+.em-res.notrade{background:var(--rdim);color:var(--red);border:1px solid var(--red)}
+
+/* ROADMAP */
+.rm-card{border:1px solid var(--border2);border-radius:var(--rl);overflow:hidden;margin-bottom:10px}
+.rm-head{display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;background:var(--bg3)}
+.rm-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.rm-info{flex:1}
+.rm-name{font-size:13px;font-weight:600;color:var(--text)}
+.rm-theme{font-size:11px;color:var(--text3);margin-top:1px}
+.rm-body{display:none;padding:16px;background:var(--bg2);border-top:1px solid var(--border2)}
+.rm-body.on{display:block}
+.rm-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.rm-col-title{font-size:9px;text-transform:uppercase;letter-spacing:.15em;margin-bottom:8px}
+.rm-task{font-size:11px;color:var(--text2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;gap:7px;align-items:flex-start}
+.rm-task input{margin-top:2px;accent-color:var(--gold)}
+
+/* VISION */
+.vis-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px}
+.vis-card{border-radius:var(--rl);overflow:hidden;border:1px solid var(--borderg);position:relative;aspect-ratio:.7;background:var(--bg3)}
+.vis-img{width:100%;height:100%;object-fit:cover}
+.vis-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:all .2s}
+.vis-ph:hover{background:var(--bg4)}
+.vis-ph-icon{font-size:34px}
+.vis-ph-txt{font-size:10px;color:var(--text3);text-align:center;padding:0 10px;line-height:1.4}
+.vis-lbl{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.92));padding:22px 10px 10px;font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;text-align:center}
+.vis-del{position:absolute;top:6px;right:6px;background:rgba(0,0,0,.7);border:1px solid var(--red);color:var(--red);border-radius:4px;padding:3px 7px;font-size:10px;cursor:pointer;display:none;z-index:5}
+.vis-card:hover .vis-del{display:block}
+.id-box{background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1px solid var(--borderg);border-radius:var(--rxl);padding:26px;text-align:center;margin-bottom:18px}
+.id-box h3{font-family:'Playfair Display',serif;font-size:22px;color:var(--gold);margin-bottom:12px}
+.id-box p{font-family:'Playfair Display',serif;font-size:15px;font-style:italic;color:var(--text2);line-height:1.8;max-width:700px;margin:0 auto}
+
+/* ROUTINE */
+.rt-block{display:flex;gap:12px;margin-bottom:7px;align-items:flex-start}
+.rt-time{min-width:70px;text-align:right;padding-top:10px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold3)}
+.rt-card{flex:1;border-radius:var(--r);border:1px solid var(--border2);padding:10px 14px;background:var(--bg3);cursor:pointer;transition:border-color .15s}
+.rt-card:hover{border-color:var(--gold3)}
+.rt-head{display:flex;justify-content:space-between;align-items:center}
+.rt-title{font-size:12px;font-weight:500;color:var(--text)}
+.rt-body{font-size:11px;color:var(--text2);line-height:1.8;margin-top:8px;display:none}
+.rt-card.open .rt-body{display:block}
+.rt-chev{font-size:9px;color:var(--text3);transition:transform .2s}
+.rt-card.open .rt-chev{transform:rotate(180deg)}
+.rt-dot{display:inline-block;width:5px;height:5px;border-radius:50%;margin-right:6px;vertical-align:middle}
+
+/* BOOK ITEM */
+.bk-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.bk-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);width:22px;flex-shrink:0;margin-top:2px}
+.bk-info{flex:1}
+.bk-title{font-size:12px;color:var(--text);font-weight:500}
+.bk-author{font-size:11px;color:var(--text3);margin-top:2px}
+
+/* STATS ROW */
+.sr{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)}
+.sr-lbl{font-size:11px;color:var(--text3)}
+.sr-val{font-size:11px;color:var(--text);font-family:'JetBrains Mono',monospace}
+
+/* INCOME ROW */
+.inc-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)}
+
+/* NOTION LIVE */
+.nl{display:inline-flex;align-items:center;gap:5px;font-size:9px;padding:3px 9px;border-radius:20px;background:var(--bdim);color:var(--blue);border:1px solid #1e2e4a}
+.nl-dot{width:5px;height:5px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* LOADING */
+.ld{display:flex;align-items:center;justify-content:center;padding:40px;color:var(--text3);font-size:11px;gap:10px}
+.spin{width:16px;height:16px;border:2px solid var(--border2);border-top-color:var(--gold);border-radius:50%;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* BUTTONS */
+.btn{padding:8px 16px;border-radius:var(--r);font-size:11px;font-weight:500;cursor:pointer;border:1px solid var(--border2);background:var(--bg3);color:var(--text2);transition:all .15s;font-family:'Inter',sans-serif}
+.btn:hover{border-color:var(--gold3);color:var(--gold)}
+.btn-gold{background:var(--gold);color:#000;border-color:var(--gold)}.btn-gold:hover{background:var(--gold2)}
+.btn-red{background:var(--rdim);color:var(--red);border-color:var(--red)}.btn-red:hover{background:#3a1010}
+.btn-sm{padding:5px 10px;font-size:10px}
+.btn-full{width:100%;margin-top:10px;text-align:center}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:500;display:none;align-items:center;justify-content:center}
+.modal-overlay.on{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--rxl);padding:28px;width:90%;max-width:480px;position:relative}
+.modal h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold);margin-bottom:18px}
+.modal-input{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);padding:10px 14px;color:var(--text);font-size:12px;font-family:'Inter',sans-serif;margin-bottom:10px;outline:none}
+.modal-input:focus{border-color:var(--gold3)}
+.modal-input::placeholder{color:var(--text3)}
+.modal-actions{display:flex;gap:8px;margin-top:6px;justify-content:flex-end}
+.modal-close{position:absolute;top:16px;right:16px;background:none;border:none;color:var(--text3);font-size:18px;cursor:pointer}
+.modal-close:hover{color:var(--text)}
+
+/* NOTIFY BAR */
+.notify-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:var(--bg3);border-radius:var(--r);border:1px solid var(--border2);margin-bottom:16px;font-size:11px}
+
+/* MOBILE */
+.mob-toggle{display:none;position:fixed;top:14px;left:14px;z-index:200;background:var(--bg2);border:1px solid var(--border2);border-radius:var(--r);padding:8px 10px;cursor:pointer;font-size:16px}
+.sb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:90}
+
+/* PWA INSTALL BANNER */
+.pwa-banner{display:none;position:fixed;bottom:20px;right:20px;background:var(--bg2);border:1px solid var(--borderg);border-radius:var(--rl);padding:16px 20px;z-index:300;max-width:300px;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.pwa-banner.show{display:block}
+.pwa-title{font-size:13px;font-weight:600;color:var(--gold);margin-bottom:4px}
+.pwa-sub{font-size:11px;color:var(--text2);margin-bottom:12px;line-height:1.5}
+.pwa-btns{display:flex;gap:8px}
+
+@media(max-width:920px){
+  .sb{transform:translateX(-100%)}.sb.open{transform:translateX(0)}
+  .main{margin-left:0}.mob-toggle{display:flex}
+  .sb-overlay.on{display:block}
+  .content{padding:16px 14px}
+  .topbar{padding:12px 14px;padding-left:56px}
+  .g4,.g3,.g2,.g-hero,.rm-cols,.vis-grid{grid-template-columns:1fr}
+  .tb-clock,.tb-right{display:none}
+}
+</style>
+</head>
+<body>
+
+<button class="mob-toggle" onclick="toggleSB()">☰</button>
+<div class="sb-overlay" id="ov" onclick="toggleSB()"></div>
+
+<!-- PWA INSTALL BANNER -->
+<div class="pwa-banner" id="pwaBanner">
+  <div class="pwa-title">📱 Install Joshua OS</div>
+  <div class="pwa-sub">Add to your home screen for the full app experience on phone and laptop.</div>
+  <div class="pwa-btns">
+    <button class="btn btn-gold btn-sm" onclick="installPWA()">Install App</button>
+    <button class="btn btn-sm" onclick="document.getElementById('pwaBanner').classList.remove('show')">Later</button>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<div class="sb" id="sb">
+  <div class="sb-logo">
+    <div class="sb-lion">🦁</div>
+    <div class="sb-name">JOSHUA<br>EMPIRE OS</div>
+    <div class="sb-sub">Life Command Center</div>
+  </div>
+  <nav class="sb-nav">
+    <div class="nav-grp">Command</div>
+    <div class="nav-i on" onclick="go('dash',this)"><span class="ic">⚡</span>Dashboard</div>
+    <div class="nav-i" onclick="go('gates',this)"><span class="ic">✅</span>10 Gates</div>
+    <div class="nav-grp">Trading</div>
+    <div class="nav-i" onclick="go('accounts',this)"><span class="ic">🏦</span>Accounts</div>
+    <div class="nav-i" onclick="go('challenge',this)"><span class="ic">🎯</span>Challenge Tracker</div>
+    <div class="nav-i" onclick="go('withdrawals',this)"><span class="ic">💸</span>Withdrawals</div>
+    <div class="nav-i" onclick="go('accchart',this)"><span class="ic">📉</span>Account Charts</div>
+    <div class="nav-i" onclick="go('journal',this)"><span class="ic">📈</span>Trade Journal</div>
+    <div class="nav-i" onclick="go('backtest',this)"><span class="ic">📊</span>Backtesting</div>
+    <div class="nav-grp">Life OS</div>
+    <div class="nav-i" onclick="go('roadmap',this)"><span class="ic">🎯</span>6M Roadmap</div>
+    <div class="nav-i" onclick="go('vision',this)"><span class="ic">🖼️</span>Vision Board</div>
+    <div class="nav-i" onclick="go('routine',this)"><span class="ic">⏰</span>Daily OS</div>
+    <div class="nav-grp">Growth</div>
+    <div class="nav-i" onclick="go('books',this)"><span class="ic">📚</span>Books</div>
+    <div class="nav-i" onclick="go('biz',this)"><span class="ic">🏢</span>Business</div>
+    <div class="nav-grp">Intelligence</div>
+    <div class="nav-i" onclick="go('notes',this)"><span class="ic">🧠</span>AI Notes & Analysis</div>
+  </nav>
+  <div class="sb-quote">"Discipline today. Freedom tomorrow. Legacy forever."<span>— Joshua Ekpe</span></div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+<div class="topbar">
+  <div class="tb-left">
+    <div class="tb-name">JOSHUA EMPIRE OS</div>
+    <div class="tb-role">Trader · Entrepreneur · Builder · Legacy Creator</div>
+    <div class="tb-quote">"I am building something no one can take away from me."</div>
+  </div>
+  <div class="tb-clock">
+    <div class="tb-time" id="clock">00:00</div>
+    <div class="tb-date" id="ddate">Loading...</div>
+  </div>
+  <div class="tb-right">
+    <div class="tb-season-lbl">🔥 Current Season</div>
+    <div class="tb-season">Millionaire Loading 💰</div>
+    <div class="tb-prog-wrap">
+      <div class="tb-prog-labels"><span>Billionaire Journey</span><span id="pct">18%</span></div>
+      <div class="tb-prog-track"><div class="tb-prog-fill" style="width:18%"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ══ DASHBOARD ══ -->
+<div class="sec on" id="sec-dash">
+  <div class="g-hero">
+    <div>
+      <div class="sh"><div class="sh-title" id="greeting">Good Morning, Joshua</div><div class="sh-line"></div><div class="sh-badge" id="dayBadge">Sunday</div></div>
+      <div class="card card-g" style="margin-bottom:12px">
+        <div class="clbl">🧠 Emotional State — Rate before trading</div>
+        <div class="em-track" id="emTrack"></div>
+        <div class="em-res" id="emRes"></div>
+      </div>
+      <div class="card" style="margin-bottom:12px">
+        <div class="clbl">📋 Daily Non-Negotiables</div>
+        <div id="dcList"></div>
+      </div>
+    </div>
+    <div>
+      <div class="sh"><div class="sh-title">Habit Tracker</div><div class="sh-line"></div></div>
+      <div class="card"><div id="hbTracker"></div></div>
+    </div>
+    <div>
+      <div class="sh"><div class="sh-title">Quick Stats</div><div class="sh-line"></div></div>
+      <div class="card card-g" style="margin-bottom:10px">
+        <div class="clbl">Total Funded Capital</div>
+        <div class="cval g">$215,000</div>
+        <div class="csub">Target: $1,200,000</div>
+        <div class="prog-wrap"><div class="prog-track"><div class="prog-fill" style="width:18%"></div></div></div>
+      </div>
+      <div class="card" style="margin-bottom:10px">
+        <div class="clbl">Backtest Win Rate</div>
+        <div class="cval gr">76.9%</div>
+        <div class="csub">A+ setups: 90.7%</div>
+      </div>
+      <div class="card">
+        <div class="clbl">Weekly Trades</div>
+        <div class="cval" id="weeklyCount">0 / 3</div>
+        <div class="csub">Max 3 per week</div>
+      </div>
+      <div class="card" style="margin-top:10px">
+        <div class="clbl">Monthly Trades</div>
+        <div class="cval" id="monthlyCount">0</div>
+        <div class="csub" id="monthlyPnl">P&L this month: $0</div>
+      </div>
+    </div>
+  </div>
+  <div class="notify-bar">
+    <span style="color:var(--text3)">Notion live connection</span>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span class="nl"><span class="nl-dot"></span>Live</span>
+      <button class="btn btn-sm" onclick="refreshAll()">↻ Refresh</button>
+    </div>
+  </div>
+  <div class="sh"><div class="sh-title">Account Overview</div><div class="sh-line"></div></div>
+  <div class="g3" id="dashAccounts"><div class="ld"><div class="spin"></div>Loading from Notion…</div></div>
+  <div class="sh" style="margin-top:4px"><div class="sh-title">Recent Trades</div><div class="sh-line"></div><span class="nl"><span class="nl-dot"></span>Notion</span></div>
+  <div class="card"><div id="recentTrades"><div class="ld"><div class="spin"></div>Loading…</div></div></div>
+</div>
+
+<!-- ══ 10 GATES ══ -->
+<div class="sec" id="sec-gates">
+  <div class="sh"><div class="sh-title">The 10 Gates — Pre-Trade Checklist</div><div class="sh-line"></div></div>
+  <div class="g2">
+    <div>
+      <div class="card">
+        <div style="font-size:11px;color:var(--text3);margin-bottom:12px;line-height:1.6">All 10 gates must clear before any entry. One kill switch = session ends immediately.</div>
+        <div id="gatesWrap"></div>
+        <div class="verdict" id="gVerdict"></div>
+        <button class="btn btn-full" onclick="resetGates()">↺ Reset Checklist</button>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:12px">
+        <div class="clbl">🎯 Your A+ Setup Formula</div>
+        <div style="font-size:12px;color:var(--text2);line-height:2;margin-top:8px">
+          <span style="color:var(--gold)">Strong HTF trend</span><br>
+          + Double Top / Double Bottom / Bullish Pennant<br>
+          + Morning Star / Shooting Star / Engulfing candle<br>
+          + London Open session<br>
+          + Tuesday or Wednesday entry<br>
+          <br><span style="color:var(--green);font-weight:600">= 90%+ Win Rate Edge</span>
+        </div>
+      </div>
+      <div class="card card-r" style="margin-bottom:12px">
+        <div class="clbl" style="color:var(--red)">⛔ Never Trade These</div>
+        <div style="font-size:11px;color:var(--text3);line-height:2;margin-top:6px">
+          ✗ Consolidation before reversal — 0% win rate<br>
+          ✗ Hammer as standalone confirmation — 58.8%<br>
+          ✗ B grade setups — 20% win rate<br>
+          ✗ Monday, Friday, Sunday entries<br>
+          ✗ New York session on Fridays<br>
+          ✗ Bullish Rectangle — 0% win rate
+        </div>
+      </div>
+      <div class="card">
+        <div class="clbl">📅 Weekly Schedule</div>
+        <div style="margin-top:8px">
+          <div class="sr"><span class="sr-lbl">Monday</span><span style="font-size:11px;color:var(--amber)">Prep Only</span></div>
+          <div class="sr"><span class="sr-lbl">Tuesday</span><span style="font-size:11px;color:var(--green)">✅ Primary Entry</span></div>
+          <div class="sr"><span class="sr-lbl">Wednesday</span><span style="font-size:11px;color:var(--green)">✅ Primary Entry</span></div>
+          <div class="sr"><span class="sr-lbl">Thursday</span><span style="font-size:11px;color:var(--amber)">Manage Only</span></div>
+          <div class="sr"><span class="sr-lbl">Friday</span><span style="font-size:11px;color:var(--red)">⛔ Closed</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ACCOUNTS ══ -->
+<div class="sec" id="sec-accounts">
+  <div class="sh"><div class="sh-title">Account Tracker</div><div class="sh-line"></div><span class="nl"><span class="nl-dot"></span>Notion</span></div>
+  <div class="g3" id="fullAccounts"><div class="ld"><div class="spin"></div>Loading…</div></div>
+  <div class="g2" style="margin-top:4px">
+    <div class="card">
+      <div class="clbl">Funding Progress — $215k → $1.2M</div>
+      <div class="cval g" style="font-size:20px;margin:8px 0">18% Complete</div>
+      <div class="prog-track" style="height:7px;border-radius:4px"><div class="prog-fill" style="width:18%;height:100%;border-radius:4px"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--text3);margin-top:6px"><span>$215,000 current</span><span>$1,200,000 target</span></div>
+    </div>
+    <div class="card">
+      <div class="clbl">Break Protocols</div>
+      <div style="font-size:11px;color:var(--text3);line-height:2.1;margin-top:8px">
+        ⛔ Loss taken → 4 hour break, platform closed<br>
+        ⛔ 2 losses this week → Stop for the week<br>
+        ⛔ Emotion below 6 → No trading today<br>
+        ⛔ Kill switch triggered → Session ends
+      </div>
+    </div>
+  </div>
+  <div class="sh" style="margin-top:4px"><div class="sh-title">Income Streams</div><div class="sh-line"></div>
+    <button class="btn btn-sm btn-gold" onclick="openModal('modalIncome')">+ Add Income</button>
+  </div>
+  <div class="card" style="margin-bottom:10px">
+    <div class="clbl" style="margin-bottom:8px">Expected Monthly Income Goal</div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <input id="incomeGoalInput" type="number" step="100" placeholder="e.g. 12500" class="modal-input" style="margin:0;flex:1;max-width:200px">
+      <button class="btn btn-gold btn-sm" onclick="saveIncomeGoal()">Set Goal</button>
+      <span id="incomeGoalDisplay" style="font-size:12px;color:var(--gold);font-family:'JetBrains Mono',monospace"></span>
+    </div>
+  </div>
+  <div class="card"><div id="incomeEl"><div class="ld"><div class="spin"></div>Loading…</div></div></div>
+</div>
+
+<!-- ══ JOURNAL ══ -->
+<div class="sec" id="sec-journal">
+  <div class="sh"><div class="sh-title">Trade Journal</div><div class="sh-line"></div><span class="nl"><span class="nl-dot"></span>Notion</span></div>
+  <div class="tabs">
+    <button class="tab-b on" onclick="swTab('journal','all',this)">All Live Trades</button>
+    <button class="tab-b" onclick="swTab('journal','wins',this)">Wins</button>
+    <button class="tab-b" onclick="swTab('journal','losses',this)">Losses</button>
+    <button class="tab-b" onclick="swTab('journal','stats',this)">Statistics</button>
+  </div>
+  <div class="tab-c on" id="journal-all"><div class="card"><div id="jAll"><div class="ld"><div class="spin"></div>Loading from Notion…</div></div></div></div>
+  <div class="tab-c" id="journal-wins"><div class="card"><div id="jWins"></div></div></div>
+  <div class="tab-c" id="journal-losses"><div class="card"><div id="jLosses"></div></div></div>
+  <div class="tab-c" id="journal-stats"><div class="g3" id="jStats"></div></div>
+</div>
+
+<!-- ══ BACKTEST ══ -->
+<div class="sec" id="sec-backtest">
+  <div class="sh"><div class="sh-title">Backtest Database</div><div class="sh-line"></div><span class="nl"><span class="nl-dot"></span>Notion</span></div>
+  <div class="g4" style="margin-bottom:16px" id="btStats">
+    <div class="card"><div class="clbl">Total Backtests</div><div class="cval g" id="btTotal">—</div></div>
+    <div class="card"><div class="clbl">Win Rate</div><div class="cval gr" id="btWR">—</div></div>
+    <div class="card"><div class="clbl">A+ Win Rate</div><div class="cval gr" id="btAplusWR">—</div></div>
+    <div class="card"><div class="clbl">Best Day</div><div class="cval g" style="font-size:18px" id="btBestDay">—</div></div>
+  </div>
+  <div class="tabs">
+    <button class="tab-b on" onclick="swTab('btabs','trades',this)">All Trades</button>
+    <button class="tab-b" onclick="swTab('btabs','patterns',this)">High Win Rate Patterns</button>
+    <button class="tab-b" onclick="swTab('btabs','account',this)">$100K Account</button>
+  </div>
+  <div class="tab-c on" id="btabs-trades"><div class="card"><div id="btTable"><div class="ld"><div class="spin"></div>Loading backtest data…</div></div></div></div>
+  <div class="tab-c" id="btabs-patterns"><div id="btPatterns"></div></div>
+  <div class="tab-c" id="btabs-account"><div class="card"><div id="bt100k"><div class="ld"><div class="spin"></div>Loading $100K account backtests…</div></div></div></div>
+</div>
+
+<!-- ══ ROADMAP ══ -->
+<div class="sec" id="sec-roadmap">
+  <div class="sh"><div class="sh-title">6 Month Millionaire Roadmap</div><div class="sh-line"></div></div>
+  <div class="g3" style="margin-bottom:16px">
+    <div class="card card-g"><div class="clbl">Challenge Start</div><div class="cval g" style="font-size:20px">May 2026</div></div>
+    <div class="card"><div class="clbl">Funding Target</div><div class="cval gr">$1,200,000</div></div>
+    <div class="card"><div class="clbl">Target Date</div><div class="cval" style="font-size:20px">Nov 2026</div></div>
+  </div>
+  <div id="rmWrap"></div>
+</div>
+
+<!-- ══ VISION BOARD ══ -->
+<div class="sec" id="sec-vision">
+  <div class="sh"><div class="sh-title">Vision Board — Joshua's Empire</div><div class="sh-line"></div>
+    <button class="btn btn-sm btn-gold" onclick="openAddVision()">+ Add Vision</button>
+  </div>
+  <div class="id-box">
+    <h3>🦁 My Identity Statement</h3>
+    <p>"I am Joshua Ekpe. A disciplined, process-driven trader and entrepreneur building a legacy that cannot be taken away from me. I think long term. I act with precision. I protect capital like a risk manager and build businesses like a systems architect."</p>
+  </div>
+  <div class="vis-grid" id="visGrid"></div>
+  <div class="card">
+    <div class="clbl" style="margin-bottom:12px">🌅 Morning Activation — Read every morning before opening charts</div>
+    <div class="g2" id="morningQs"></div>
+  </div>
+</div>
+
+<!-- ══ DAILY OS ══ -->
+<div class="sec" id="sec-routine">
+  <div class="sh"><div class="sh-title">Daily Operating System</div><div class="sh-line"></div></div>
+  <div class="tabs">
+    <button class="tab-b on" onclick="swTab('routine','tday',this)">Trading Day</button>
+    <button class="tab-b" onclick="swTab('routine','ntday',this)">Non-Trading Day</button>
+    <button class="tab-b" onclick="swTab('routine','body',this)">Body Protocol</button>
+  </div>
+  <div class="tab-c on" id="routine-tday"><div class="card" id="tradDay"></div></div>
+  <div class="tab-c" id="routine-ntday"><div class="card" id="ntDay"></div></div>
+  <div class="tab-c" id="routine-body">
+    <div class="g2">
+      <div class="card"><div class="clbl" style="margin-bottom:10px">Weekly Training Split</div><div id="trainSplit"></div></div>
+      <div class="card"><div class="clbl" style="margin-bottom:10px">Nutrition & Recovery</div><div id="nutri"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ BOOKS ══ -->
+<div class="sec" id="sec-books">
+  <div class="sh"><div class="sh-title">Reading List</div><div class="sh-line"></div>
+    <span class="nl" style="margin-right:8px"><span class="nl-dot"></span>Notion</span>
+    <button class="btn btn-sm btn-gold" onclick="openAddBook()">+ Add Book</button>
+  </div>
+  <div class="tabs">
+    <button class="tab-b on" onclick="swTab('books','all',this)">All Books</button>
+    <button class="tab-b" onclick="swTab('books','now',this)">Reading Now</button>
+    <button class="tab-b" onclick="swTab('books','done',this)">Completed</button>
+  </div>
+  <div class="tab-c on" id="books-all"><div class="card"><div id="bkAll"><div class="ld"><div class="spin"></div>Loading from Notion…</div></div></div></div>
+  <div class="tab-c" id="books-now"><div class="card"><div id="bkNow"></div></div></div>
+  <div class="tab-c" id="books-done"><div class="card"><div id="bkDone"></div></div></div>
+</div>
+
+<!-- ══ BUSINESS ══ -->
+<div class="sec" id="sec-biz">
+  <div class="sh"><div class="sh-title">Business Center</div><div class="sh-line"></div>
+    <button class="btn btn-sm btn-gold" onclick="openAddBiz()">+ Add Business</button>
+  </div>
+  <div class="g2" id="bizCards"></div>
+</div>
+
+<!-- ══ NOTES & AI ANALYSIS ══ -->
+<div class="sec" id="sec-notes">
+  <div class="sh"><div class="sh-title">AI Notes & Daily Analysis</div><div class="sh-line"></div></div>
+
+  <!-- HOURLY LOG -->
+  <div class="sh" style="margin-bottom:12px"><div class="sh-title" style="font-size:16px">⏰ Hourly Activity Log</div><div class="sh-line"></div>
+    <button class="btn btn-sm" onclick="clearHourlyLog()">Clear</button>
+  </div>
+  <div class="card" style="margin-bottom:16px">
+    <div class="clbl" style="margin-bottom:12px">Fill in what you did each hour — from 4:00am to 9:30pm</div>
+    <div id="hourlyGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px"></div>
+    <button class="btn btn-gold" style="margin-top:12px" onclick="saveHourlyLog()">💾 Save Hourly Log</button>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div>
+      <div class="card" style="margin-bottom:12px">
+        <div class="clbl">📝 Daily Journal — Additional notes</div>
+        <textarea id="dailyNote" placeholder="Any extra thoughts, reflections, or things that happened today that are not covered in the hourly log..." style="width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);padding:12px 14px;color:var(--text);font-size:12px;font-family:'Inter',sans-serif;resize:vertical;min-height:140px;outline:none;margin-top:8px;line-height:1.6"></textarea>
+        <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+          <button class="btn btn-gold" onclick="analyseDay()" id="analyseBtn">🧠 Analyse My Day</button>
+          <button class="btn" onclick="saveNote()">💾 Save Note</button>
+          <button class="btn" onclick="loadTodayNote()">📂 Load Today</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="clbl">✅ Today's Task Summary</div>
+        <div id="noteTaskSummary" style="margin-top:8px;font-size:11px;color:var(--text2);line-height:1.8"></div>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="min-height:420px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div class="clbl" style="margin-bottom:0">🤖 AI Analysis</div>
+          <span id="nextSummaryTime" style="font-size:10px;color:var(--text3)"></span>
+        </div>
+        <div id="aiAnalysis">
+          <div style="padding:30px;text-align:center;color:var(--text3);font-size:12px;line-height:1.7">
+            Fill your hourly log and daily note then click<br><strong style="color:var(--gold)">Analyse My Day</strong><br>for your personalised AI analysis.<br><br>
+            <span style="font-size:10px">Auto-analysis runs at 9:00pm every evening.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sh" style="margin-top:4px"><div class="sh-title">Past Notes</div><div class="sh-line"></div></div>
+  <div class="card"><div id="pastNotes"></div></div>
+</div>
+
+
+<!-- ══ CHALLENGE TRACKER ══ -->
+<div class="sec" id="sec-challenge">
+  <div class="sh"><div class="sh-title">Challenge Tracker</div><div class="sh-line"></div>
+    <button class="btn btn-sm btn-gold" onclick="openChallengeModal()">+ Log Weekly P&L</button>
+  </div>
+  <div class="g3" style="margin-bottom:16px">
+    <div class="card card-g">
+      <div class="clbl">$100K GFT — Account 1</div>
+      <div class="cval g" id="ch1Balance">$0.00</div>
+      <div class="csub">Target: $2,000/week</div>
+      <div class="prog-wrap"><div class="prog-track"><div class="prog-fill" id="ch1Prog" style="width:0%"></div></div></div>
+    </div>
+    <div class="card card-g">
+      <div class="clbl">$100K GFT — Account 2</div>
+      <div class="cval g" id="ch2Balance">$0.00</div>
+      <div class="csub">Target: $2,000/week</div>
+      <div class="prog-wrap"><div class="prog-track"><div class="prog-fill" id="ch2Prog" style="width:0%"></div></div></div>
+    </div>
+    <div class="card card-g">
+      <div class="clbl">$15K GFT</div>
+      <div class="cval g" id="ch3Balance">$0.00</div>
+      <div class="csub">Target: $600/week</div>
+      <div class="prog-wrap"><div class="prog-track"><div class="prog-fill" id="ch3Prog" style="width:0%"></div></div></div>
+    </div>
+  </div>
+  <!-- Phase Status -->
+  <div class="g3" style="margin-bottom:16px">
+    <div class="card" id="ch1PhaseCard">
+      <div class="clbl">$100K Account 1 — Phase Status</div>
+      <div id="ch1PhaseStatus" style="margin-top:8px"></div>
+      <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">
+        <button class="btn btn-sm" onclick="setPhase(0,1)" id="ch1P1Btn">✅ Phase 1 Passed</button>
+        <button class="btn btn-sm" onclick="setPhase(0,2)" id="ch1P2Btn">✅ Phase 2 Passed</button>
+        <button class="btn btn-sm" style="color:var(--green);border-color:var(--green)" onclick="setPhase(0,3)" id="ch1FundBtn">🏦 Funded!</button>
+      </div>
+    </div>
+    <div class="card" id="ch2PhaseCard">
+      <div class="clbl">$100K Account 2 — Phase Status</div>
+      <div id="ch2PhaseStatus" style="margin-top:8px"></div>
+      <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">
+        <button class="btn btn-sm" onclick="setPhase(1,1)" id="ch2P1Btn">✅ Phase 1 Passed</button>
+        <button class="btn btn-sm" onclick="setPhase(1,2)" id="ch2P2Btn">✅ Phase 2 Passed</button>
+        <button class="btn btn-sm" style="color:var(--green);border-color:var(--green)" onclick="setPhase(1,3)" id="ch2FundBtn">🏦 Funded!</button>
+      </div>
+    </div>
+    <div class="card" id="ch3PhaseCard">
+      <div class="clbl">$15K Account — Phase Status</div>
+      <div id="ch3PhaseStatus" style="margin-top:8px"></div>
+      <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">
+        <button class="btn btn-sm" onclick="setPhase(2,1)" id="ch3P1Btn">✅ Phase 1 Passed</button>
+        <button class="btn btn-sm" onclick="setPhase(2,2)" id="ch3P2Btn">✅ Phase 2 Passed</button>
+        <button class="btn btn-sm" style="color:var(--green);border-color:var(--green)" onclick="setPhase(2,3)" id="ch3FundBtn">🏦 Funded!</button>
+      </div>
+    </div>
+  </div>
+  <!-- Weekly history per account -->
+  <div class="sh"><div class="sh-title" style="font-size:16px">Weekly P&L History</div><div class="sh-line"></div></div>
+  <div class="tabs">
+    <button class="tab-b on" onclick="swTab('chweek','acc1',this)">$100K Acc 1</button>
+    <button class="tab-b" onclick="swTab('chweek','acc2',this)">$100K Acc 2</button>
+    <button class="tab-b" onclick="swTab('chweek','acc3',this)">$15K</button>
+  </div>
+  <div class="tab-c on" id="chweek-acc1"><div class="card"><div id="chHist0"></div></div></div>
+  <div class="tab-c" id="chweek-acc2"><div class="card"><div id="chHist1"></div></div></div>
+  <div class="tab-c" id="chweek-acc3"><div class="card"><div id="chHist2"></div></div></div>
+</div>
+
+<!-- ══ WITHDRAWALS ══ -->
+<div class="sec" id="sec-withdrawals">
+  <div class="sh"><div class="sh-title">Withdrawal Tracker</div><div class="sh-line"></div>
+    <button class="btn btn-sm btn-gold" onclick="openWithdrawModal()">+ Schedule Withdrawal</button>
+  </div>
+  <div class="g3" style="margin-bottom:16px">
+    <div class="card card-g">
+      <div class="clbl">Total Withdrawn (All Time)</div>
+      <div class="cval g" id="wTotalAll">$0.00</div>
+    </div>
+    <div class="card">
+      <div class="clbl">Pending Withdrawals</div>
+      <div class="cval" id="wPending">0</div>
+    </div>
+    <div class="card">
+      <div class="clbl">This Month</div>
+      <div class="cval gr" id="wThisMonth">$0.00</div>
+    </div>
+  </div>
+  <div class="card"><div id="wList"><div style="padding:30px;text-align:center;color:var(--text3)">No withdrawals logged yet.</div></div></div>
+</div>
+
+<!-- ══ ACCOUNT CHARTS ══ -->
+<div class="sec" id="sec-accchart">
+  <div class="sh"><div class="sh-title">Account Performance Charts</div><div class="sh-line"></div></div>
+  <div class="g3" style="margin-bottom:16px">
+    <div class="card" style="cursor:pointer;border:2px solid transparent;transition:border-color .2s" id="accChartBtn0" onclick="selectAccChart(0)">
+      <div class="clbl">$100K GFT — Acc 1</div>
+      <div style="font-size:13px;color:var(--gold);font-weight:600" id="accChartBal0">—</div>
+    </div>
+    <div class="card" style="cursor:pointer;border:2px solid transparent;transition:border-color .2s" id="accChartBtn1" onclick="selectAccChart(1)">
+      <div class="clbl">$100K GFT — Acc 2</div>
+      <div style="font-size:13px;color:var(--gold);font-weight:600" id="accChartBal1">—</div>
+    </div>
+    <div class="card" style="cursor:pointer;border:2px solid transparent;transition:border-color .2s" id="accChartBtn2" onclick="selectAccChart(2)">
+      <div class="clbl">$15K GFT</div>
+      <div style="font-size:13px;color:var(--gold);font-weight:600" id="accChartBal2">—</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="clbl" id="accChartTitle" style="margin-bottom:12px">Select an account above to view chart</div>
+    <canvas id="accChartCanvas" height="80"></canvas>
+    <div id="accChartEmpty" style="padding:40px;text-align:center;color:var(--text3);font-size:12px">Select an account and log weekly P&L in Challenge Tracker to see chart.</div>
+  </div>
+</div>
+
+
+</div><!-- /content -->
+
+<!-- CHALLENGE LOG MODAL -->
+<div class="modal-overlay" id="modalChallenge">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modalChallenge')">✕</button>
+    <h3>Log Weekly P&L</h3>
+    <select class="modal-input" id="chAccSelect">
+      <option value="0">$100K GFT — Account 1</option>
+      <option value="1">$100K GFT — Account 2</option>
+      <option value="2">$15K GFT</option>
+    </select>
+    <input class="modal-input" id="chWeekInput" type="text" placeholder="Week label (e.g. Week 1, May 13)">
+    <input class="modal-input" id="chPnlInput" type="number" step="0.01" placeholder="P&L amount (e.g. 1850.00)">
+    <input class="modal-input" id="chBalInput" type="number" step="0.01" placeholder="Current balance (e.g. 101850.00)">
+    <div class="modal-actions">
+      <button class="btn" onclick="closeModal('modalChallenge')">Cancel</button>
+      <button class="btn btn-gold" onclick="saveChallengeWeek()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- WITHDRAWAL MODAL -->
+<div class="modal-overlay" id="modalWithdraw">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modalWithdraw')">✕</button>
+    <h3>Schedule / Log Withdrawal</h3>
+    <select class="modal-input" id="wAccSelect">
+      <option value="$100K GFT — Acc 1">$100K GFT — Acc 1</option>
+      <option value="$100K GFT — Acc 2">$100K GFT — Acc 2</option>
+      <option value="$15K GFT">$15K GFT</option>
+    </select>
+    <input class="modal-input" id="wAmountInput" type="number" step="0.01" placeholder="Withdrawal amount (e.g. 2500.00)">
+    <input class="modal-input" id="wDateInput" type="date" placeholder="Withdrawal date">
+    <input class="modal-input" id="wNoteInput" type="text" placeholder="Note (optional, e.g. Monthly payout)">
+    <div class="modal-actions">
+      <button class="btn" onclick="closeModal('modalWithdraw')">Cancel</button>
+      <button class="btn btn-gold" onclick="saveWithdrawal()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- INCOME ADD MODAL -->
+<div class="modal-overlay" id="modalIncome">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modalIncome')">✕</button>
+    <h3>Add Income Stream</h3>
+    <input class="modal-input" id="incNameInput" placeholder="Income source name">
+    <input class="modal-input" id="incTargetInput" type="number" step="0.01" placeholder="Monthly target (e.g. 3000)">
+    <input class="modal-input" id="incActualInput" type="number" step="0.01" placeholder="Current actual (optional)">
+    <div class="modal-actions">
+      <button class="btn" onclick="closeModal('modalIncome')">Cancel</button>
+      <button class="btn btn-gold" onclick="saveIncomeStream()">Add</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modalVision">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modalVision')">✕</button>
+    <h3>Add Vision Board Item</h3>
+    <input class="modal-input" id="visTitle" placeholder="Title (e.g. Financial Freedom)">
+    <input class="modal-input" id="visDesc" placeholder="Description (e.g. $50k/month, complete freedom)">
+    <input class="modal-input" id="visIcon" placeholder="Emoji icon (e.g. 💰)">
+    <div class="modal-actions">
+      <button class="btn" onclick="closeModal('modalVision')">Cancel</button>
+      <button class="btn btn-gold" onclick="saveVision()">Add to Board</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalBook">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modalBook')">✕</button>
+    <h3>Add Book</h3>
+    <input class="modal-input" id="bkTitleInput" placeholder="Book title">
+    <input class="modal-input" id="bkAuthorInput" placeholder="Author">
+    <select class="modal-input" id="bkStatusInput" style="cursor:pointer">
+      <option value="Upcoming">Upcoming</option>
+      <option value="Reading">Reading</option>
+      <option value="Finished">Finished</option>
+    </select>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeModal('modalBook')">Cancel</button>
+      <button class="btn btn-gold" onclick="saveBook()">Add Book</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalBiz">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modalBiz')">✕</button>
+    <h3>Add Business</h3>
+    <input class="modal-input" id="bizNameInput" placeholder="Business name">
+    <input class="modal-input" id="bizIconInput" placeholder="Emoji icon (e.g. 🏢)">
+    <input class="modal-input" id="bizTargetInput" placeholder="Target (e.g. Launch by Month 3)">
+    <input class="modal-input" id="bizStatusInput" placeholder="Status (e.g. Planning, Active, Research)">
+    <textarea class="modal-input" id="bizMilestonesInput" placeholder="Milestones — one per line" rows="4" style="resize:vertical"></textarea>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeModal('modalBiz')">Cancel</button>
+      <button class="btn btn-gold" onclick="saveBiz()">Add Business</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════ NOTION CONFIG ═══════════
+const TOKEN='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';
+const NV='2022-06-28';
+
+function cleanN(val){
+  if(!val||val==='—'||String(val).trim()===''||String(val).trim()==='nan')return'—';
+  const s=String(val).trim();
+  // Handle unresolved relation placeholder
+  if(s.startsWith('_rel:'))return'—';
+  // Strip Notion relation suffix: "Name (Name%20abc123...md)" -> "Name"
+  const m=s.match(/^(.+?)\s*\((?:[A-Za-z0-9%_\-\s\.#!@$&*()]+)\.md\)\s*$/);
+  if(m)return m[1].trim();
+  // Strip URL-encoded suffix like "(London%20Open%20ce8d...)"
+  const m2=s.match(/^(.+?)\s*\([^)]*%[0-9A-Fa-f]{2}[^)]*\)\s*$/);
+  if(m2)return m2[1].trim();
+  return s;
+}
+function parseMoney(val){
+  if(!val||val==='nan'||val==='$0'||String(val).trim()==='')return 0;
+  const s=String(val).trim();
+  // Remove currency symbols, commas, arrows, spaces
+  const clean=s.replace(/[▲▼$,\s]/g,'');
+  // Find the first valid number (handles "+2767.01 +%0")
+  const m=clean.match(/^[+\-]?([0-9]+\.?[0-9]*)/);
+  if(m)return parseFloat(m[0]);
+  // Try extracting any number
+  const nums=clean.match(/[+\-]?[0-9]+\.?[0-9]*/g);
+  if(nums&&nums.length)return parseFloat(nums[0]);
+  return 0;
+}
+
+async function nFetch(ep,opts={}){
+  try{
+    const r=await fetch('/.netlify/functions/notion?endpoint='+encodeURIComponent(ep)+'&method='+(opts.method||'GET'),{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:opts.body?JSON.stringify(opts.body):undefined
+    });
+    if(!r.ok){
+      const errText=await r.text().catch(()=>'');
+      console.error('Notion API error',r.status,ep,errText);
+      return null;
+    }
+    const data=await r.json();
+    if(data?.object==='error'){
+      console.error('Notion error:',data.message,'for',ep);
+      return null;
+    }
+    return data;
+  }catch(e){console.error('Notion fetch failed:',e);return null;}
+}
+async function nSearch(q){
+  const d=await nFetch('/search',{method:'POST',body:{query:q,filter:{property:'object',value:'database'}}});
+  const results=d?.results||[];
+  // Sort by exact name match first
+  return results.sort((a,b)=>{
+    const an=(a.title?.[0]?.plain_text||'').toLowerCase();
+    const bn=(b.title?.[0]?.plain_text||'').toLowerCase();
+    const ql=q.toLowerCase();
+    if(an===ql&&bn!==ql)return -1;
+    if(bn===ql&&an!==ql)return 1;
+    return 0;
+  });
+}
+// Search with multiple fallback queries
+async function nSearchMulti(...queries){
+  for(const q of queries){
+    const r=await nSearch(q);
+    if(r.length)return r;
+  }
+  return[];
+}
+async function nQuery(id,filter={}){
+  let results=[];
+  let cursor=undefined;
+  let attempts=0;
+  do{
+    const body={page_size:100,...filter};
+    if(cursor)body.start_cursor=cursor;
+    const d=await nFetch('/databases/'+id+'/query',{method:'POST',body});
+    if(!d)break;
+    results=[...results,...(d.results||[])];
+    cursor=d.has_more?d.next_cursor:undefined;
+    attempts++;
+  }while(cursor&&attempts<20);
+  return results;
+}
+// Get property value regardless of type
+function gpAny(page,name){
+  const props=page.properties;if(!props)return'';
+  const keys=Object.keys(props);
+  const k=keys.find(x=>x.toLowerCase()===name.toLowerCase())||keys.find(x=>x.toLowerCase().includes(name.toLowerCase()));
+  if(!k)return'';
+  const p=props[k];if(!p)return'';
+  const pt=p.type||'';
+  if(pt==='title')return p.title?.map(t=>t.plain_text).join('')||'';
+  if(pt==='rich_text')return p.rich_text?.map(t=>t.plain_text).join('')||'';
+  if(pt==='select')return p.select?.name||'';
+  if(pt==='multi_select')return p.multi_select?.map(s=>s.name).join(', ')||'';
+  if(pt==='number')return p.number??'';
+  if(pt==='date')return p.date?.start||'';
+  if(pt==='checkbox')return p.checkbox??false;
+  if(pt==='status')return p.status?.name||'';
+  if(pt==='formula'){
+    const f=p.formula;if(!f)return'';
+    if(f.type==='number')return f.number??'';
+    if(f.type==='string')return f.string||'';
+    if(f.type==='boolean')return String(f.boolean);
+    return'';
+  }
+  if(pt==='rollup'){
+    const r2=p.rollup;if(!r2)return'';
+    if(r2.type==='number')return r2.number??'';
+    if(r2.type==='array'){
+      return r2.array?.map(item=>{
+        if(item.type==='title')return item.title?.map(t=>t.plain_text).join('')||'';
+        if(item.type==='rich_text')return item.rich_text?.map(t=>t.plain_text).join('')||'';
+        if(item.type==='select')return item.select?.name||'';
+        return'';
+      }).filter(Boolean).join(', ')||'';
+    }
+    return'';
+  }
+  if(pt==='relation'){
+    // Relations return page IDs only — we use the page title from _relationNames cache if available
+    const ids=p.relation?.map(r=>r.id)||[];
+    if(!ids.length)return'—';
+    // Check cache
+    const names=ids.map(id=>window._relCache?.[id]).filter(Boolean);
+    if(names.length)return names.join(', ');
+    // Return placeholder that will be resolved
+    return'_rel:'+ids[0];
+  }
+  return'';
+}
+
+// Resolve relation names from cache or page title
+// We pre-fetch relation lookup tables when loading trades
+window._relCache = window._relCache || {};
+
+async function preloadRelations(dbIds){
+  for(const dbId of dbIds){
+    try{
+      const rows=await nQuery(dbId);
+      rows.forEach(r=>{
+        const id=r.id;
+        const title=r.properties?.Name?.title?.map(t=>t.plain_text).join('')||
+                    Object.values(r.properties||{}).find(p=>p.type==='title')?.title?.map(t=>t.plain_text).join('')||'';
+        if(id&&title)window._relCache[id]=title;
+      });
+    }catch(e){}
+  }
+}
+function gp(page,name,type){
+  const props=page.properties;if(!props)return'';
+  const keys=Object.keys(props);
+  const k=keys.find(x=>x.toLowerCase()===name.toLowerCase())||keys.find(x=>x.toLowerCase().includes(name.toLowerCase()));
+  if(!k)return'';
+  const p=props[k];if(!p)return'';
+  // Try requested type first, then fallback to actual property type
+  const pt=p.type||'';
+  if(type==='title'||pt==='title')return p.title?.map(t=>t.plain_text).join('')||'';
+  if(type==='select'||pt==='select')return p.select?.name||'';
+  if(type==='multi_select'||pt==='multi_select')return p.multi_select?.map(s=>s.name).join(', ')||'';
+  if(type==='number'||pt==='number')return p.number??'';
+  if(type==='date'||pt==='date')return p.date?.start||'';
+  if(type==='rich_text'||pt==='rich_text')return p.rich_text?.map(t=>t.plain_text).join('')||'';
+  if(type==='checkbox'||pt==='checkbox')return p.checkbox??false;
+  if(type==='status'||pt==='status')return p.status?.name||'';
+  if(type==='formula'||pt==='formula'){
+    const f=p.formula;if(!f)return'';
+    if(f.type==='number')return f.number??'';
+    if(f.type==='string')return f.string||'';
+    if(f.type==='boolean')return f.boolean;
+    return f.string||f.number||'';
+  }
+  if(pt==='rollup'){
+    const r=p.rollup;if(!r)return'';
+    if(r.type==='number')return r.number??'';
+    if(r.type==='array')return r.array?.map(a=>a.number??a.title?.map(t=>t.plain_text).join('')??'').filter(Boolean).join(', ')||'';
+    return'';
+  }
+  if(pt==='people')return p.people?.map(u=>u.name).join(', ')||'';
+  if(pt==='url')return p.url||'';
+  if(pt==='email')return p.email||'';
+  if(pt==='phone_number')return p.phone_number||'';
+  return'';
+}
+
+// ═══════════ CLOCK ═══════════
+function tick(){
+  const n=new Date();
+  const h=String(n.getHours()).padStart(2,'0'),m=String(n.getMinutes()).padStart(2,'0');
+  document.getElementById('clock').textContent=h+':'+m;
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  document.getElementById('ddate').textContent=days[n.getDay()]+', '+n.getDate()+' '+months[n.getMonth()]+' '+n.getFullYear();
+  document.getElementById('dayBadge').textContent=days[n.getDay()];
+  const h2=n.getHours();
+  document.getElementById('greeting').textContent=(h2<12?'Good Morning':h2<17?'Good Afternoon':'Good Evening')+', Joshua';
+}
+setInterval(tick,1000);tick();
+
+// ═══════════ NAV ═══════════
+const loaded={};
+function go(id,el){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.nav-i').forEach(n=>n.classList.remove('on'));
+  document.getElementById('sec-'+id).classList.add('on');
+  el.classList.add('on');
+  if(window.innerWidth<920)toggleSB();
+  if(!loaded[id]){loaded[id]=true;loadSection(id);}
+}
+function toggleSB(){
+  document.getElementById('sb').classList.toggle('open');
+  document.getElementById('ov').classList.toggle('on');
+}
+function swTab(sec,tab,btn){
+  document.querySelectorAll('#sec-'+sec+' .tab-c').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('#sec-'+sec+' .tab-b').forEach(b=>b.classList.remove('on'));
+  document.getElementById(sec+'-'+tab).classList.add('on');
+  btn.classList.add('on');
+}
+
+// ═══════════ MODAL ═══════════
+function openModal(id){document.getElementById(id).classList.add('on');}
+function closeModal(id){document.getElementById(id).classList.remove('on');}
+
+// ═══════════ EMOTION ═══════════
+function buildEmotion(){
+  const t=document.getElementById('emTrack');
+  for(let i=1;i<=10;i++){
+    const b=document.createElement('button');
+    b.className='em-btn';b.textContent=i;
+    b.onclick=()=>pickEmotion(i);t.appendChild(b);
+  }
+  const s=localStorage.getItem('em_score'),d=localStorage.getItem('em_date');
+  if(s&&d===new Date().toDateString())pickEmotion(parseInt(s));
+}
+function pickEmotion(n){
+  document.querySelectorAll('.em-btn').forEach((b,i)=>b.classList.toggle('on',i<n));
+  const r=document.getElementById('emRes');r.classList.add('on');
+  if(n>=6){r.className='em-res on trade';r.textContent='Score: '+n+'/10 — Cleared to trade. Stay disciplined.';}
+  else{r.className='em-res on notrade';r.textContent='Score: '+n+'/10 — DO NOT TRADE TODAY. Backtest or business work only.';}
+  localStorage.setItem('em_score',n);localStorage.setItem('em_date',new Date().toDateString());
+}
+
+// ═══════════ DAILY TASKS ═══════════
+const DCTASKS=['4:00am Wake — water, silence, no phone','Morning journal — emotion rated','Physical training completed','Read trading rules aloud','Pre-market analysis done before 7am','10-gate checklist on every entry','Post-trade journal same day','Evening reading — 30 minutes','Phone away by 9:30pm — sleep by 10pm'];
+function buildDC(){
+  const today=new Date().toDateString();
+  const saved=JSON.parse(localStorage.getItem('dc_'+today)||'{}');
+  const c=document.getElementById('dcList');c.innerHTML='';
+  DCTASKS.forEach((t,i)=>{
+    const done=saved[i]||false;
+    const d=document.createElement('div');d.className='dc-item';
+    d.innerHTML=`<div class="dc-box" style="border-color:${done?'var(--green)':'var(--border2)'};background:${done?'var(--gdim)':'var(--bg4)'};">${done?'✓':''}</div><div class="dc-txt" style="color:${done?'var(--text3)':'var(--text2)'};text-decoration:${done?'line-through':'none'}">${t}</div>`;
+    d.onclick=()=>{const s=JSON.parse(localStorage.getItem('dc_'+today)||'{}');s[i]=!s[i];localStorage.setItem('dc_'+today,JSON.stringify(s));buildDC();updateTaskSummary();checkAutoAnalyse();};
+    c.appendChild(d);
+  });
+}
+
+// ═══════════ HABITS ═══════════
+const HABITS=['4am Wake','Morning Journal','Physical Training','Pre-Market Analysis','10-Gate Checklist','Post-Trade Journal','Evening Reading','10pm Sleep','No Revenge Trade'];
+const DLABELS=['M','T','W','T','F','S','S'];
+function wk(){const n=new Date();const s=new Date(n);s.setDate(n.getDate()-n.getDay());return s.toDateString();}
+function buildHabits(){
+  const c=document.getElementById('hbTracker');
+  const saved=JSON.parse(localStorage.getItem('hb_'+wk())||'{}');
+  let h='<div class="hb-row"><div class="hb-lbl" style="font-size:9px;color:var(--text3)">Habit</div>';
+  DLABELS.forEach(d=>h+=`<div class="hb-day">${d}</div>`);h+='</div>';
+  HABITS.forEach((hab,hi)=>{
+    h+=`<div class="hb-row"><div class="hb-lbl">${hab}</div>`;
+    for(let d=0;d<7;d++){
+      const k=hi+'_'+d,st=saved[k]||'e';
+      h+=`<div class="hb-cell ${st==='d'?'done':st==='m'?'miss':''}" onclick="cycleHab(${hi},${d})">${st==='d'?'✓':st==='m'?'✗':''}</div>`;
+    }
+    h+='</div>';
+  });
+  c.innerHTML=h;
+}
+function cycleHab(hi,d){
+  const saved=JSON.parse(localStorage.getItem('hb_'+wk())||'{}');
+  const k=hi+'_'+d,cur=saved[k]||'e';
+  saved[k]=cur==='e'?'d':cur==='d'?'m':'e';
+  localStorage.setItem('hb_'+wk(),JSON.stringify(saved));buildHabits();
+}
+
+// ═══════════ 10 GATES ═══════════
+const GATES=[
+  {t:'Entry day is Tuesday, Wednesday, or Thursday only',s:'Monday, Friday, Sunday = no new entries.'},
+  {t:'Session is London Open (primary) or Asia (secondary)',s:'New York only on A+ with extra confluence. Never Friday NY.'},
+  {t:'HTF bias confirmed — strong uptrend or strong downtrend',s:'Consolidation before reversal = hard no.'},
+  {t:'Trade aligned with HTF direction — not counter-trend',s:'Trend-following only.'},
+  {t:'Confluence is Double Top, Double Bottom, or Bullish Pennant',s:'Bullish H&S only with engulfing or Morning Star.'},
+  {t:'Entry signal fully closed — Morning Star, Shooting Star, or Engulfing',s:'Hammer alone is not sufficient.'},
+  {t:'Entry is AFTER confirmation — setup has printed, not forming',s:'Think you are early = you are early. Wait.'},
+  {t:'SL structurally placed — forex under 200 pips, XAUUSD under 300 pips',s:'Wider SL = early entry. Do not trade.'},
+  {t:'Risk is 0.5% of account. TP gives 1:4 RR minimum',s:'TP placed beyond the next key structure level.'},
+  {t:'Entering from logic and structure — not FOMO, boredom, or to recover a loss',s:'If you hesitate answering this, the answer is no.'},
+];
+const KILLS=[
+  {t:'I am trying to recover a loss from today or this week',s:'Revenge trading. Close platform. 4 hour break.'},
+  {t:'It is Monday, Friday, or Sunday',s:'Restricted days. No new entries.'},
+  {t:"I saw this setup on someone else's analysis",s:'External bias. Your system only.'},
+  {t:'Market condition is consolidation before reversal',s:'0% win rate. Not in your system.'},
+  {t:'I have already hit my weekly trade limit (3 trades)',s:'Week is closed.'},
+];
+let gs={},ks={};
+function buildGates(){
+  const c=document.getElementById('gatesWrap');
+  let h='<div class="gate-sec-lbl">Gates 1–10 — All must be cleared</div>';
+  GATES.forEach((g,i)=>h+=`<div class="gate" id="g${i}" onclick="tg(${i})"><div class="gate-box" id="gb${i}"></div><div><div class="gate-txt">${g.t}</div><div class="gate-sub">${g.s}</div></div></div>`);
+  h+='<div class="gate-sec-lbl" style="color:var(--red)">⛔ Kill Switches</div>';
+  KILLS.forEach((k,i)=>h+=`<div class="gate kill-i" id="k${i}" onclick="tk(${i})"><div class="gate-box" id="kb${i}"></div><div><div class="gate-txt" style="color:var(--red)">${k.t}</div><div class="gate-sub">${k.s}</div></div></div>`);
+  c.innerHTML=h;
+}
+function tg(i){gs[i]=!gs[i];document.getElementById('g'+i).classList.toggle('on',gs[i]);document.getElementById('gb'+i).textContent=gs[i]?'✓':'';uv();}
+function tk(i){ks[i]=!ks[i];document.getElementById('k'+i).classList.toggle('trig',ks[i]);document.getElementById('kb'+i).textContent=ks[i]?'✗':'';uv();}
+function uv(){
+  const anyK=Object.values(ks).some(v=>v);
+  const cl=Object.values(gs).filter(v=>v).length;
+  const v=document.getElementById('gVerdict');
+  if(anyK){v.className='verdict on fail';v.textContent='⛔ Kill switch triggered — Do not enter. Close the platform.';}
+  else if(cl===10){v.className='verdict on pass';v.textContent='✅ All 10 gates cleared — You have permission to enter.';}
+  else if(cl>0){v.className='verdict on fail';v.textContent=cl+'/10 gates cleared — Cannot enter until all 10 pass.';}
+  else v.className='verdict';
+}
+function resetGates(){gs={};ks={};buildGates();document.getElementById('gVerdict').className='verdict';}
+
+// ═══════════ ACCOUNTS ═══════════
+function accHTML(a){
+  const isLive=a.type.toLowerCase().includes('live');
+  const prog=a.goal&&a.balance?Math.min((a.balance/a.goal)*100,100).toFixed(0):0;
+  const pnlColor=a.pnl>=0?'var(--green)':'var(--red)';
+  return`<div class="acc-card">
+    <div class="acc-name">${a.name}</div>
+    <div class="acc-eq">$${Number(a.balance).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
+    <div class="acc-pnl" style="color:${pnlColor}">${a.pnl>=0?'+':''}$${Math.abs(a.pnl).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})} P&L</div>
+    <div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap">
+      <span class="acc-status ${isLive?'s-live':'s-ch'}">${a.type.replace('Challange','Challenge')}</span>
+      ${a.winrate?`<span style="font-size:10px;color:var(--text3)">WR: ${a.winrate}</span>`:''}
+      ${a.trades?`<span style="font-size:10px;color:var(--text3)">${a.trades} trades</span>`:''}
+    </div>
+    <div class="prog-wrap">
+      <div class="prog-track"><div class="prog-fill" style="width:${prog}%"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--text3);margin-top:5px">
+        <span>$${Number(a.balance).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</span>
+        <span>Goal: $${Number(a.goal).toLocaleString()}</span>
+      </div>
+    </div>
+  </div>`;
+}
+const STATIC_ACC=[
+  {name:'GFT $100K',balance:2767.01,pnl:2767.01,type:'Challenge',goal:108000,winrate:'100%',trades:1},
+  {name:'GFT $100K',balance:1714.49,pnl:1714.49,type:'Live',goal:104000,winrate:'50%',trades:2},
+  {name:'GFT $15k',balance:0,pnl:0,type:'Challenge',goal:16200,winrate:'0%',trades:0},
+];
+async function loadAccounts(){
+  const dbs=await nSearchMulti('Accounts','System Database','Account Tracker');
+  const e1=document.getElementById('dashAccounts'),e2=document.getElementById('fullAccounts');
+  const staticHTML=STATIC_ACC.map(accHTML).join('');
+  if(!dbs.length){if(e1)e1.innerHTML=staticHTML;if(e2)e2.innerHTML=staticHTML;loadIncome();return;}
+  const rows=await nQuery(dbs[0].id);
+  if(!rows.length){if(e1)e1.innerHTML=staticHTML;if(e2)e2.innerHTML=staticHTML;loadIncome();return;}
+  const live=rows.filter(r=>{const t=gp(r,'Type','select')||'';return!t.toLowerCase().includes('backtest');});
+  if(!live.length){if(e1)e1.innerHTML=staticHTML;if(e2)e2.innerHTML=staticHTML;loadIncome();return;}
+  const h=live.map(r=>{
+    const name=gp(r,'account','title')||gp(r,'Account','title')||'Account';
+    // Current Balance is a formula that returns string like "$2,767.01"
+    const balRaw=gpAny(r,'Current Balance');
+    const balance=parseMoney(balRaw);
+    // Goal is a formula returning string like "$108,000.00"
+    const goalRaw=gpAny(r,'Goal');
+    const goal=parseMoney(goalRaw);
+    // Type is select
+    const type=gp(r,'Type','select')||gpAny(r,'Type')||'Active';
+    // Win rate
+    const winrate=gpAny(r,'%Win Rate')||'';
+    // Trades count
+    const trades=Number(gp(r,'Trades','number')||gpAny(r,'Trades')||0);
+    // Net PnL formula
+    const pnlRaw=gpAny(r,'Net PnL');
+    const pnl=parseMoney(pnlRaw);
+    return accHTML({name,balance,pnl,goal,type,winrate,trades});
+  }).join('');
+  if(e1)e1.innerHTML=h;if(e2)e2.innerHTML=h;
+  loadIncome();
+}
+async function loadIncome(){buildIncomeSection();}
+
+// ═══════════ TRADES ═══════════
+function tradeTable(rows,lim=100){
+  if(!rows.length)return'<div style="padding:30px;text-align:center;color:var(--text3)">No trades found.</div>';
+  const cols=['Date','Symbol','Account','Day','Session','Grade','Model','Confluence','Signal','SL','Net PnL','Outcome'];
+  let h=`<div class="tbl-wrap"><table class="tbl"><thead><tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>`;
+  rows.slice(0,lim).forEach(r=>{
+    const date=(gp(r,'Entry / Exit Date','date')||'').replace(/\//g,'-')||'—';
+    const sym=cleanN(gpAny(r,'Symbol'));
+    const acc=cleanN(gpAny(r,'Account'));
+    const day=gpAny(r,'#Day')||'—';
+    const sess=cleanN(gpAny(r,'Session'));
+    const grade=cleanN(gpAny(r,'Setup Grade'));
+    const conf=cleanN(gpAny(r,'Confluences'));
+    const sig=cleanN(gpAny(r,'Entry Signal'));
+    const sl=gp(r,'S/L Pips','number')||gpAny(r,'S/L Pips')||'—';
+    const out=gpAny(r,'Outcome')||'—';
+    const model=cleanN(gpAny(r,'Model'))||'—';
+    const pnlRaw=gpAny(r,'Net PnL')||0;
+    const pnl=typeof pnlRaw==='number'?pnlRaw:parseMoney(pnlRaw);
+    const isW=out.toLowerCase().includes('profit')||out.toLowerCase().includes('win');
+    const isL=out.toLowerCase().includes('loss');
+    h+=`<tr>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:10px">${date}</td>
+      <td><span class="bdg bdg-gold">${sym}</span></td>
+      <td style="font-size:10px;color:var(--text3)">${cleanN(acc)}</td>
+      <td style="font-size:10px;color:var(--text3)">${day}</td>
+      <td style="font-size:10px">${sess}</td>
+      <td><span class="bdg ${grade==='A+'?'bdg-g':grade==='A'?'bdg-b':'bdg-a'}">${grade}</span></td>
+      <td style="font-size:10px;color:var(--text3)">${model}</td>
+      <td style="font-size:10px;color:var(--text3)">${conf.length>16?conf.substring(0,16)+'…':conf}</td>
+      <td style="font-size:10px">${sig.length>14?sig.substring(0,14)+'…':sig}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:10px">${sl}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:10px;color:${pnl>0?'var(--green)':pnl<0?'var(--red)':'var(--text3)'}">${pnl!==0?'$'+Number(pnl).toLocaleString():'—'}</td>
+      <td><span class="bdg ${isW?'bdg-g':isL?'bdg-r':'bdg-a'}" title="${out}">${isW?'Win ✅':isL?'Loss ❌':out.length>12?out.substring(0,12)+'…':out}</span></td>
+    </tr>`;
+  });
+  h+='</tbody></table></div>';return h;
+}
+async function loadTrades(){
+  // Preload relation lookup tables for Symbol, Session, Confluences, Entry Signal, Setup Grade, Model
+  try{
+    const relDbs=await Promise.all([
+      nSearchMulti('Symbols','Symbol'),
+      nSearchMulti('Market Sessions','Sessions','Session'),
+      nSearchMulti('Confluences','Confluence'),
+      nSearchMulti('Entry Signal'),
+      nSearchMulti('Setup Grade'),
+      nSearchMulti('Models','Model'),
+      nSearchMulti('Bias'),
+      nSearchMulti('Market Conditions'),
+    ]);
+    const dbIds=relDbs.filter(d=>d.length).map(d=>d[0].id);
+    if(dbIds.length)await preloadRelations(dbIds);
+  }catch(e){console.warn('Relation preload failed:',e);}
+
+  const dbs=await nSearchMulti('Trades','Trade Journal','Trading Journal','Trade Log');
+  const allEl=document.getElementById('jAll'),recEl=document.getElementById('recentTrades');
+  if(!dbs.length){
+    const msg='<div style="padding:30px;text-align:center;color:var(--text3)">No trades found — make sure your Trades database is shared with the Joshua OS App integration in Notion.</div>';
+    if(allEl)allEl.innerHTML=msg;if(recEl)recEl.innerHTML=msg;return;
+  }
+  const allRows=await nQuery(dbs[0].id);
+  function isBT(r){
+    // Backtest? is a select field with values "Yes" or "No"
+    const v=gpAny(r,'Backtest?');
+    if(v===true||v===false)return v; // checkbox fallback
+    const s=String(v).toLowerCase().trim();
+    return s==='yes'||s==='true'||s==='1';
+  }
+  const live=allRows.filter(r=>!isBT(r));
+  const bt=allRows.filter(r=>isBT(r));
+  window._btRows=bt;
+  const rows=live.length?live:allRows;
+  if(allEl)allEl.innerHTML=tradeTable(rows);
+  if(recEl)recEl.innerHTML=tradeTable(rows.slice(0,5));
+  const wins=rows.filter(r=>{const o=gpAny(r,'Outcome')||'';return o.toLowerCase().includes('profit')||o.toLowerCase().includes('win');});
+  const losses=rows.filter(r=>{const o=gpAny(r,'Outcome')||'';return o.toLowerCase().includes('loss');});
+  const wr=rows.length?((wins.length/rows.length)*100).toFixed(1):0;
+
+  // Weekly count — trades closed this week
+  const now=new Date();
+  const weekStart=new Date(now);weekStart.setDate(now.getDate()-now.getDay());weekStart.setHours(0,0,0,0);
+  const weekTrades=rows.filter(r=>{
+    const d=gp(r,'Entry / Exit Date','date');
+    return d&&new Date(d)>=weekStart;
+  });
+  const wkEl=document.getElementById('weeklyCount');
+  if(wkEl)wkEl.textContent=weekTrades.length+' / 3';
+  if(wkEl)wkEl.style.color=weekTrades.length>=3?'var(--red)':weekTrades.length>=2?'var(--amber)':'var(--text)';
+
+  // Monthly count and PnL
+  const monthStart=new Date(now.getFullYear(),now.getMonth(),1);
+  const monthTrades=rows.filter(r=>{
+    const d=gp(r,'Entry / Exit Date','date');
+    return d&&new Date(d)>=monthStart;
+  });
+  const monthPnl=monthTrades.reduce((s,r)=>{
+    const p=gpAny(r,'Net PnL')||0;
+    return s+(typeof p==='number'?p:parseMoney(p));
+  },0);
+  const mEl=document.getElementById('monthlyCount');
+  const mPnlEl=document.getElementById('monthlyPnl');
+  if(mEl)mEl.textContent=monthTrades.length;
+  if(mPnlEl)mPnlEl.textContent='P&L this month: '+(monthPnl>=0?'+':'')+'$'+Math.abs(monthPnl).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+  if(mPnlEl)mPnlEl.style.color=monthPnl>=0?'var(--green)':'var(--red)';
+
+  const sEl=document.getElementById('jStats');
+  if(sEl)sEl.innerHTML=`
+    <div class="card"><div class="clbl">Total Live Trades</div><div class="cval g">${rows.length}</div></div>
+    <div class="card"><div class="clbl">Win Rate</div><div class="cval gr">${wr}%</div></div>
+    <div class="card"><div class="clbl">W / L</div><div class="cval" style="font-size:20px"><span style="color:var(--green)">${wins.length}W</span> / <span style="color:var(--red)">${losses.length}L</span></div></div>
+    <div class="card"><div class="clbl">This Week</div><div class="cval" style="font-size:20px;color:${weekTrades.length>=3?'var(--red)':'var(--green)'}">${weekTrades.length} / 3</div></div>
+    <div class="card"><div class="clbl">This Month</div><div class="cval" style="font-size:20px">${monthTrades.length}</div><div class="csub" style="color:${monthPnl>=0?'var(--green)':'var(--red)'}">${monthPnl>=0?'+':''}$${Math.abs(monthPnl).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</div></div>
+    <div class="card"><div class="clbl">Avg Win</div><div class="cval gr" style="font-size:20px">$${wins.length?(wins.reduce((s,r)=>{const p=gpAny(r,'Net PnL')||0;return s+(typeof p==='number'?p:parseMoney(p));},0)/wins.length).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2}):0}</div></div>`;
+  const wEl=document.getElementById('jWins'),lEl=document.getElementById('jLosses');
+  if(wEl)wEl.innerHTML=tradeTable(wins);if(lEl)lEl.innerHTML=tradeTable(losses);
+}
+async function loadBacktests(){
+  const el=document.getElementById('btTable');
+  let bt=[];
+  if(window._btRows&&window._btRows.length){
+    bt=window._btRows;
+  } else {
+    const dbs=await nSearchMulti('Trades','Trade Journal','Trading Journal');
+    if(!dbs.length){if(el)el.innerHTML='<div style="padding:30px;text-align:center;color:var(--text3)">No backtest data found.</div>';return;}
+    const allRows=await nQuery(dbs[0].id);
+    bt=allRows.filter(r=>{
+      const v=gpAny(r,'Backtest?');
+      if(v===true)return true;
+      if(v===false)return false;
+      const s=String(v).toLowerCase().trim();
+      return s==='yes'||s==='true';
+    });
+  }
+  if(el)el.innerHTML=tradeTable(bt.length?bt:[]);
+  buildBtPatterns(bt);
+  // Compute live backtest stats
+  const btWins=bt.filter(r=>{const o=gpAny(r,'Outcome')||'';return o.toLowerCase().includes('profit')||o.toLowerCase().includes('win');});
+  const wr=bt.length?((btWins.length/bt.length)*100).toFixed(1):0;
+  // A+ win rate
+  const aplus=bt.filter(r=>cleanN(gpAny(r,'Setup Grade'))==='A+');
+  const aplusWins=aplus.filter(r=>{const o=gpAny(r,'Outcome')||'';return o.toLowerCase().includes('profit');});
+  const aplusWR=aplus.length?((aplusWins.length/aplus.length)*100).toFixed(1):0;
+  // Best day
+  const dayStats={};
+  bt.forEach(r=>{
+    const d=gpAny(r,'#Day')||'Unknown';
+    if(!dayStats[d])dayStats[d]={w:0,t:0};
+    dayStats[d].t++;
+    const o=gpAny(r,'Outcome')||'';
+    if(o.toLowerCase().includes('profit'))dayStats[d].w++;
+  });
+  let bestDay='—',bestWR=0;
+  Object.entries(dayStats).forEach(([d,s])=>{const w=s.t?s.w/s.t*100:0;if(w>bestWR){bestWR=w;bestDay=d+' '+w.toFixed(0)+'%';}});
+  const tot=document.getElementById('btTotal'),wrEl=document.getElementById('btWR');
+  const apEl=document.getElementById('btAplusWR'),bdEl=document.getElementById('btBestDay');
+  if(tot)tot.textContent=bt.length;
+  if(wrEl)wrEl.textContent=wr+'%';
+  if(apEl)apEl.textContent=aplusWR+'%';
+  if(bdEl)bdEl.textContent=bestDay;
+}
+
+// ═══════════ ROADMAP ═══════════
+const RM=[
+  {n:'1',name:'Month 1 — Foundation Lock-In',theme:'Eliminate bad habits. Build the system.',target:'Pass Challenges',color:'#E8A84C',
+   trading:['Pass $100k Phase 1 challenge','Pass $15k challenge','Zero B-grade trades','Zero Monday/Friday entries','Pre-trade checklist every trade'],
+   systems:['Habit loop running daily 30 days','Journal every trade same day','Weekly review every Friday','Backtest Silver and GBPJPY','Complete trading playbook'],
+   biz:['Define Contour Academy offer','Build brand identity','Start content creation','Set monthly financial targets']},
+  {n:'2',name:'Month 2 — Funding Expansion',theme:'Scale capital. Prove consistency.',target:'$400k Funded',color:'#5588DD',
+   trading:['Get funded on $100k Phase 2','Apply for 2nd $100k account','Maintain 80%+ win rate','No drawdown violations','First payout received'],
+   systems:['GBPJPY + XAGUSD backtest complete','Risk dashboard built','Emotional pattern log running'],
+   biz:['Academy waitlist launched','First content published','Python learning 1hr daily']},
+  {n:'3',name:'Month 3 — Income Activation',theme:'First $10k+ month. Business revenue starts.',target:'$10k+ Income',color:'#3DCC8A',
+   trading:['3 funded accounts active','Monthly withdrawal processed','10% monthly return target'],
+   systems:['100+ backtest database','Automated journal template'],
+   biz:['Contour Academy first cohort','Marketing Hub soft launch','First business revenue']},
+  {n:'4',name:'Month 4 — Capital Scaling',theme:'Aggressive but disciplined scaling.',target:'$700k Funded',color:'#9B72CF',
+   trading:['$700k total funding','Multiple $100k accounts','Zero rule violations 4 months'],
+   systems:['Investor-ready track record','6 month journal audit'],
+   biz:['Academy 2nd cohort','Agricultural business registered','Marketing Hub growing']},
+  {n:'5',name:'Month 5 — Institutional Level',theme:'Operate like a professional fund manager.',target:'$1M Funded',color:'#888780',
+   trading:['$1M+ funded capital','5 months clean track record','Ready for external capital'],
+   systems:['Full trading SOP documented'],
+   biz:['Contour Firm structure drafted','Academy recurring revenue','Monthly income $25k+']},
+  {n:'6',name:'Month 6 — Millionaire Milestone',theme:'$1.2M funded. $1M net worth.',target:'$1.2M Funded',color:'#C9A84C',
+   trading:['$1.2M funded capital ✅','6 months profitable track record','Monthly earnings $30k–$50k'],
+   systems:['Complete empire documented'],
+   biz:['Contour Academy established','Contour Firm operational','Relocated to Abuja']},
+];
+function buildRoadmap(){
+  const c=document.getElementById('rmWrap');
+  c.innerHTML=RM.map((m,mi)=>{
+    const saved=JSON.parse(localStorage.getItem('rm_'+mi)||'{}');
+    const all=[...m.trading,...m.systems,...m.biz];
+    const done=all.filter((_,j)=>saved[j]).length;
+    const pct=((done/all.length)*100).toFixed(0);
+    const tH=m.trading.map((t,j)=>`<div class="rm-task"><input type="checkbox" ${saved[j]?'checked':''} onchange="saveRM(${mi},${j},this.checked)"><span>${t}</span></div>`).join('');
+    const sH=m.systems.map((t,j)=>`<div class="rm-task"><input type="checkbox" ${saved[m.trading.length+j]?'checked':''} onchange="saveRM(${mi},${m.trading.length+j},this.checked)"><span>${t}</span></div>`).join('');
+    const bH=m.biz.map((t,j)=>`<div class="rm-task"><input type="checkbox" ${saved[m.trading.length+m.systems.length+j]?'checked':''} onchange="saveRM(${mi},${m.trading.length+m.systems.length+j},this.checked)"><span>${t}</span></div>`).join('');
+    return`<div class="rm-card">
+      <div class="rm-head" onclick="toggleRM(${mi})">
+        <div class="rm-num" style="background:${m.color}22;color:${m.color}">${m.n}</div>
+        <div class="rm-info"><div class="rm-name">${m.name}</div><div class="rm-theme">${m.theme}</div></div>
+        <div style="text-align:right"><div style="font-size:12px;font-weight:600;color:${m.color}">${m.target}</div><div style="font-size:9px;color:var(--text3);margin-top:2px">${pct}% done</div></div>
+        <div style="font-size:10px;color:var(--text3);margin-left:10px">▼</div>
+      </div>
+      <div class="rm-body" id="rmb_${mi}">
+        <div class="rm-cols">
+          <div><div class="rm-col-title" style="color:${m.color}">Trading</div>${tH}</div>
+          <div><div class="rm-col-title" style="color:${m.color}">Systems</div>${sH}</div>
+          <div><div class="rm-col-title" style="color:${m.color}">Business</div>${bH}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function toggleRM(i){document.getElementById('rmb_'+i).classList.toggle('on');}
+function saveRM(mi,ti,v){const s=JSON.parse(localStorage.getItem('rm_'+mi)||'{}');s[ti]=v;localStorage.setItem('rm_'+mi,JSON.stringify(s));buildRoadmap();}
+
+// ═══════════ VISION BOARD ═══════════
+const DEF_VIS=[
+  {title:'Financial Freedom',icon:'💰',desc:'$50k/month. Complete time freedom. Money works for you.'},
+  {title:'Luxury Lifestyle',icon:'🏠',desc:'Structured premium life in Abuja. High quality in everything.'},
+  {title:'Dream Office',icon:'🖥️',desc:'Multi-screen trading setup. Professional workspace. Elite environment.'},
+  {title:'Family & Legacy',icon:'👨‍👩‍👧‍👦',desc:'Security and generational wealth for my family forever.'},
+  {title:'Global Impact',icon:'🌍',desc:'Contour Academy — 1000+ traders. Contour Firm — capital managed.'},
+];
+const MQS=[
+  {q:'Why am I doing this?',a:'For financial freedom, family legacy, and global impact.'},
+  {q:'What standard am I holding today?',a:'A+ setups only. Process over emotion. Always.'},
+  {q:'What would my future self do right now?',a:'Follow the system. Trust the edge. Do the work.'},
+  {q:'Who am I becoming?',a:'A disciplined, wealthy, free, and impactful man.'},
+];
+function getVisions(){return JSON.parse(localStorage.getItem('visions')||JSON.stringify(DEF_VIS));}
+function saveVisions(v){localStorage.setItem('visions',JSON.stringify(v));}
+function buildVision(){
+  const visions=getVisions();
+  const g=document.getElementById('visGrid');
+  g.innerHTML=visions.map((v,i)=>{
+    const img=localStorage.getItem('vis_img_'+i);
+    return`<div class="vis-card">
+      ${img?`<img src="${img}" class="vis-img" alt="${v.title}">`:`<div class="vis-ph" onclick="upVis(${i})"><div class="vis-ph-icon">${v.icon||'🖼️'}</div><div class="vis-ph-txt">${v.desc||v.title}</div><div style="font-size:9px;color:var(--text3);margin-top:4px">Tap to upload image</div></div>`}
+      <div class="vis-lbl">${v.title}</div>
+      <button class="vis-del" onclick="delVis(${i},event)">✕ Remove</button>
+    </div>`;
+  }).join('');
+  const mq=document.getElementById('morningQs');
+  mq.innerHTML=MQS.map(q=>`<div style="padding:12px;background:var(--bg3);border-radius:var(--r);border:1px solid var(--borderg)"><div style="font-size:11px;color:var(--gold);margin-bottom:5px;font-weight:500">${q.q}</div><div style="font-size:12px;color:var(--text2);font-style:italic;line-height:1.5">${q.a}</div></div>`).join('');
+}
+function upVis(i){
+  const inp=document.createElement('input');inp.type='file';inp.accept='image/*';
+  inp.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{localStorage.setItem('vis_img_'+i,ev.target.result);buildVision();};r.readAsDataURL(f);};
+  inp.click();
+}
+function delVis(i,e){
+  e.stopPropagation();
+  if(!confirm('Remove this vision item?'))return;
+  const v=getVisions();v.splice(i,1);saveVisions(v);
+  for(let j=i;j<v.length+1;j++){
+    const next=localStorage.getItem('vis_img_'+(j+1));
+    if(next)localStorage.setItem('vis_img_'+j,next);
+    else localStorage.removeItem('vis_img_'+j);
+  }
+  buildVision();
+}
+function openAddVision(){openModal('modalVision');}
+function saveVision(){
+  const title=document.getElementById('visTitle').value.trim();
+  const desc=document.getElementById('visDesc').value.trim();
+  const icon=document.getElementById('visIcon').value.trim()||'🖼️';
+  if(!title)return alert('Please enter a title.');
+  const v=getVisions();v.push({title,desc,icon});saveVisions(v);
+  document.getElementById('visTitle').value='';
+  document.getElementById('visDesc').value='';
+  document.getElementById('visIcon').value='';
+  closeModal('modalVision');buildVision();
+}
+
+// ═══════════ BOOKS ═══════════
+const DEF_BOOKS=[
+  {title:'Trading in the Zone',author:'Mark Douglas',status:'Reading'},
+  {title:'The Disciplined Trader',author:'Mark Douglas',status:'Upcoming'},
+  {title:'Market Wizards',author:'Jack Schwager',status:'Upcoming'},
+  {title:'The Psychology of Money',author:'Morgan Housel',status:'Upcoming'},
+  {title:'Atomic Habits',author:'James Clear',status:'Upcoming'},
+  {title:'Deep Work',author:'Cal Newport',status:'Upcoming'},
+  {title:'The One Thing',author:'Gary Keller',status:'Upcoming'},
+  {title:"Can't Hurt Me",author:'David Goggins',status:'Upcoming'},
+  {title:'The E-Myth Revisited',author:'Michael Gerber',status:'Upcoming'},
+  {title:'Rich Dad Poor Dad',author:'Robert Kiyosaki',status:'Upcoming'},
+  {title:'$100M Offers',author:'Alex Hormozi',status:'Upcoming'},
+  {title:'Why We Sleep',author:'Matthew Walker',status:'Upcoming'},
+  {title:'Relentless',author:'Tim Grover',status:'Upcoming'},
+];
+function getBooks(){return JSON.parse(localStorage.getItem('user_books')||'null')||null;}
+function saveBooks(b){localStorage.setItem('user_books',JSON.stringify(b));}
+function booksHTML(books,showDel=true){
+  if(!books.length)return'<div style="padding:20px;text-align:center;color:var(--text3)">No books here yet.</div>';
+  return`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;padding:4px 0">`+books.map((b,i)=>{
+    const sc=b.status==='Reading'?'var(--gold)':b.status==='Finished'||b.status==='Completed'?'var(--green)':'var(--text3)';
+    const cover=localStorage.getItem('bk_cover_'+encodeURIComponent(b.title));
+    return`<div style="background:var(--bg3);border:1px solid var(--border2);border-radius:var(--rl);overflow:hidden;position:relative">
+      <!-- Cover image area -->
+      <div style="width:100%;height:180px;background:var(--bg4);position:relative;cursor:pointer;overflow:hidden" onclick="uploadBookCover('${encodeURIComponent(b.title)}',${i})" title="Click to upload cover">
+        ${cover
+          ?`<img src="${cover}" style="width:100%;height:100%;object-fit:cover">`
+          :`<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px">
+              <div style="font-size:28px">📖</div>
+              <div style="font-size:9px;color:var(--text3);text-align:center;padding:0 8px">Tap to add cover</div>
+            </div>`}
+        <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.8));padding:16px 8px 8px">
+          <div style="font-size:10px;font-weight:600;color:#fff;line-height:1.3">${b.title.length>30?b.title.substring(0,30)+'…':b.title}</div>
+        </div>
+      </div>
+      <!-- Details -->
+      <div style="padding:8px 10px">
+        <div style="font-size:10px;color:var(--text3);margin-bottom:4px">${b.author||''}</div>
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <span style="font-size:9px;padding:2px 7px;border-radius:20px;background:var(--bg4);color:${sc};border:1px solid var(--border2)">${b.status}</span>
+          ${showDel?`<button class="btn btn-sm btn-red" onclick="delBook(${i})" style="padding:2px 6px;font-size:9px">✕</button>`:''}
+        </div>
+      </div>
+    </div>`;
+  }).join('')+'</div>';
+}
+
+function uploadBookCover(encodedTitle,idx){
+  const inp=document.createElement('input');inp.type='file';inp.accept='image/*';
+  inp.onchange=e=>{
+    const f=e.target.files[0];if(!f)return;
+    const r=new FileReader();
+    r.onload=ev=>{
+      localStorage.setItem('bk_cover_'+encodedTitle,ev.target.result);
+      // Re-render books
+      const books=getBooks()||DEF_BOOKS.slice();
+      renderBooks(books);
+    };
+    r.readAsDataURL(f);
+  };
+  inp.click();
+}
+async function loadBooks(){
+  const dbs=await nSearchMulti('Books','Bookshelf','Book List','Reading List');
+  let books=[];
+  if(dbs.length){
+    const rows=await nQuery(dbs[0].id);
+    if(rows.length){
+      rows.forEach(r=>{
+        const title=gp(r,'Name','title')||gp(r,'Title','title')||'';
+        const authorRaw=gp(r,'Author','select')||gp(r,'Author','rich_text')||'';
+        const author=cleanN(authorRaw).replace('| Author: @','').trim();
+        const status=gp(r,'Status','select')||'Upcoming';
+        if(title)books.push({title,author,status});
+      });
+    }
+  }
+  const localBooks=getBooks();
+  if(localBooks){
+    localBooks.forEach(lb=>{
+      if(!books.find(b=>b.title.toLowerCase()===lb.title.toLowerCase()))books.push(lb);
+    });
+  }
+  if(!books.length)books=DEF_BOOKS;
+  renderBooks(books);
+}
+function renderBooks(books){
+  const allEl=document.getElementById('bkAll');
+  const nowEl=document.getElementById('bkNow');
+  const doneEl=document.getElementById('bkDone');
+  if(allEl)allEl.innerHTML=booksHTML(books);
+  if(nowEl)nowEl.innerHTML=booksHTML(books.filter(b=>b.status==='Reading'||b.status==='Up Next'));
+  if(doneEl)doneEl.innerHTML=booksHTML(books.filter(b=>b.status==='Finished'||b.status==='Completed'));
+}
+function openAddBook(){openModal('modalBook');}
+function saveBook(){
+  const title=document.getElementById('bkTitleInput').value.trim();
+  const author=document.getElementById('bkAuthorInput').value.trim();
+  const status=document.getElementById('bkStatusInput').value;
+  if(!title)return alert('Please enter a book title.');
+  const books=getBooks()||DEF_BOOKS.slice();
+  books.push({title,author,status});saveBooks(books);
+  document.getElementById('bkTitleInput').value='';
+  document.getElementById('bkAuthorInput').value='';
+  closeModal('modalBook');renderBooks(books);
+}
+function delBook(i){
+  if(!confirm('Remove this book?'))return;
+  const books=getBooks()||DEF_BOOKS.slice();
+  books.splice(i,1);saveBooks(books);renderBooks(books);
+}
+
+// ═══════════ BUSINESS ═══════════
+const DEF_BIZ=[
+  {name:'Contour Trading Academy',icon:'🎓',status:'Planning',target:'First cohort Month 3',color:'#E8A84C',
+   tasks:['Define offer — who, what result, what price','Build brand identity — name, colours, tone','Launch waitlist — collect leads before launch','Build curriculum outline','Launch first cohort','2nd cohort — refine from feedback','Recurring revenue stream established']},
+  {name:'Contour Trading Firm',icon:'🏦',status:'Research',target:'Structure by Month 5',color:'#5588DD',
+   tasks:['Build 4-month clean track record','Research legal and regulatory requirements','Draft firm structure and capital model','Begin investor conversations']},
+  {name:'Marketing Hub',icon:'🛒',status:'Planning',target:'Soft launch Month 3',color:'#3DCC8A',
+   tasks:['Define marketplace model — buyers and sellers','Build platform structure and offer categories','Design onboarding for sellers','Launch MVP with first 10 sellers','Marketing and growth strategy','Revenue model — commission or subscription','Scale to 100 active users']},
+  {name:'Agricultural Business — Fish Farming',icon:'🐟',status:'Concept',target:'Active by Month 5',color:'#9B72CF',
+   tasks:['Research startup costs and site requirements','Identify site location','Develop business plan and financial model','Register business and source capital','Operations begin']},
+  {name:'Python & Technology',icon:'💻',status:'Learning',target:'First project Month 2',color:'#888780',
+   tasks:['Variables, loops, functions — Week 1','Data structures — Week 2','File handling and APIs — Week 3','Data analysis with pandas — Week 4','First trading automation project']},
+];
+function getBiz(){return JSON.parse(localStorage.getItem('user_biz')||JSON.stringify(DEF_BIZ));}
+function saveBiz2(b){localStorage.setItem('user_biz',JSON.stringify(b));}
+function buildBiz(){
+  const bizList=getBiz();
+  document.getElementById('bizCards').innerHTML=bizList.map((b,bi)=>{
+    const tasks=b.tasks.map((t,i)=>{
+      const done=localStorage.getItem(`bz_${bi}_${i}`)===`1`;
+      return`<div style="display:flex;gap:8px;align-items:center;padding:5px 0;border-bottom:1px solid var(--border);cursor:pointer" onclick="togBiz(${bi},${i},this)">
+        <div style="width:14px;height:14px;border-radius:3px;border:1px solid ${done?'var(--green)':'var(--border2)'};background:${done?'var(--gdim)':'var(--bg4)'};display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--green);flex-shrink:0">${done?'✓':''}</div>
+        <div style="font-size:11px;color:${done?'var(--text3)':'var(--text2)'};text-decoration:${done?'line-through':'none'};flex:1">${t}</div>
+      </div>`;
+    }).join('');
+    return`<div class="card card-g">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+        <div><div style="font-size:22px;margin-bottom:5px">${b.icon}</div><div style="font-size:14px;font-weight:600;color:var(--text)">${b.name}</div><div style="font-size:10px;color:var(--text3);margin-top:2px">${b.target}</div></div>
+        <div style="display:flex;gap:6px;align-items:center">
+          <span class="bdg bdg-a">${b.status}</span>
+          <button class="btn btn-sm btn-red" onclick="delBizItem(${bi})" style="padding:3px 7px;font-size:9px">✕</button>
+        </div>
+      </div>
+      <div class="clbl" style="margin-bottom:8px">Milestones</div>
+      ${tasks}
+    </div>`;
+  }).join('');
+}
+function togBiz(bi,i,el){
+  const k=`bz_${bi}_${i}`;
+  localStorage.setItem(k,localStorage.getItem(k)==='1'?'0':'1');
+  buildBiz();
+}
+function delBizItem(bi){
+  if(!confirm('Remove this business?'))return;
+  const biz=getBiz();biz.splice(bi,1);saveBiz2(biz);buildBiz();
+}
+function openAddBiz(){openModal('modalBiz');}
+function saveBiz(){
+  const name=document.getElementById('bizNameInput').value.trim();
+  const icon=document.getElementById('bizIconInput').value.trim()||'🏢';
+  const target=document.getElementById('bizTargetInput').value.trim();
+  const status=document.getElementById('bizStatusInput').value.trim()||'Planning';
+  const milestonesRaw=document.getElementById('bizMilestonesInput').value.trim();
+  if(!name)return alert('Please enter a business name.');
+  const tasks=milestonesRaw?milestonesRaw.split('\n').filter(t=>t.trim()):['Define the business model','Build the first offer','Launch MVP'];
+  const biz=getBiz();
+  biz.push({name,icon,status,target,color:'#C9A84C',tasks});
+  saveBiz2(biz);
+  document.getElementById('bizNameInput').value='';
+  document.getElementById('bizIconInput').value='';
+  document.getElementById('bizTargetInput').value='';
+  document.getElementById('bizStatusInput').value='';
+  document.getElementById('bizMilestonesInput').value='';
+  closeModal('modalBiz');buildBiz();
+}
+
+// ═══════════ ROUTINE ═══════════
+const TRAD_DAY=[
+  {t:'4:00am',title:'Wake & Silence',c:'#E8A84C',items:['No phone for first 30 minutes','Drink 500ml water immediately','Sit in silence 5 minutes — set your intention']},
+  {t:'4:10am',title:'Morning Journal',c:'#5588DD',items:['Rate emotional state 1–10 → Write the number','Write: What is my intention for today?','Write: What mistake am I most at risk of?','Below 6 = NO TRADING TODAY']},
+  {t:'4:20am',title:'Physical Training — 40 mins',c:'#3DCC8A',items:['App-based workout or 30 min walk minimum','No skipping — even 20 minutes counts','Movement before markets = calmer, better decisions']},
+  {t:'5:10am',title:'Shower, Prayer & Mindset',c:'#888780',items:['Prayer or quiet reflection','Read your 7 trading rules aloud','Read your 6 month goals — feel them']},
+  {t:'5:30am',title:'Pre-Market Analysis — 90 mins',c:'#9B72CF',items:['HTF bias — Weekly + Daily on all pairs','Mark key levels — support, resistance, liquidity','Check economic calendar — flag red news','Write bias for each pair in journal — one sentence','Analysis ends at 7:00am sharp']},
+  {t:'7:00am',title:'London Open — Execution Window',c:'#3DCC8A',items:['Run 10-gate checklist before any entry','Enter, set SL and TP, step away from chart','Check charts max once per hour','Loss taken → close platform, 4 hour break']},
+  {t:'12:00pm',title:'Midday Block',c:'#888780',items:['Eat a proper meal — no junk on trading days','Rest 20–30 minutes if needed','Business tasks — Academy, content, Python']},
+  {t:'3:00pm',title:'Post-Trade Review & Journal',c:'#9B72CF',items:['Log all trades — same day, fully completed','Screenshot entry and exit — annotate chart','Rate execution 1–10, separate from outcome','One thing correct. One thing to improve.']},
+  {t:'4:00pm',title:'Deep Work — Business',c:'#E8A84C',items:['Python learning — 1 hour focused session','Contour Academy or Marketing Hub work','One business task from monthly plan']},
+  {t:'7:00pm',title:'Evening Reading — 30 mins',c:'#5588DD',items:['One chapter from reading list','Take one note — most useful idea tonight','Plan tomorrow — pairs, levels, signal needed']},
+  {t:'9:30pm',title:'Shutdown Protocol',c:'#888780',items:['Phone away — no screens after 9:30pm','Final journal entry — discipline score /10','Sleep by 10:00pm']},
+];
+const NTRAD_DAY=[
+  {t:'4:00am',title:'Wake, Water, Silence',c:'#E8A84C',items:['Same 4am wake — no deviation ever','500ml water. 5 minutes silence.']},
+  {t:'4:10am',title:'Deeper Morning Journal',c:'#5588DD',items:['Write 3 things you are grateful for','Write your 6 month goal and where you are now','The one thing that moves you forward most today','Friday only: Full weekly review']},
+  {t:'4:30am',title:'Physical Training — 60 mins',c:'#3DCC8A',items:['Longer session on non-trading days','Use your app. Follow the programme.','Track progress — weight, reps, time']},
+  {t:'5:30am',title:'Shower, Prayer & Mindset',c:'#888780',items:['Same ritual. Same standard. Every day.']},
+  {t:'6:00am',title:'Backtesting — 2 Hours',c:'#9B72CF',items:['Minimum 5 trade scenarios per session','A+ setup combinations only','Log every backtest — same format as live trades']},
+  {t:'8:00am',title:'Trading Education — 2 Hours',c:'#E8A84C',items:['Study one concept deeply','Watch one video, take structured notes','Review your 3 worst trades this week']},
+  {t:'10:00am',title:'Business Deep Work — 2 Hours',c:'#3DCC8A',items:['Contour Academy or Marketing Hub work','Python — one lesson or project milestone','One business task from monthly plan']},
+];
+function rtBlock(b){
+  return`<div class="rt-block">
+    <div class="rt-time">${b.t}</div>
+    <div class="rt-card" onclick="this.classList.toggle('open')" style="border-left:3px solid ${b.c}">
+      <div class="rt-head"><div class="rt-title">${b.title}</div><div class="rt-chev">▼</div></div>
+      <div class="rt-body">${b.items.map(i=>`<div><span class="rt-dot" style="background:${b.c}"></span>${i}</div>`).join('')}</div>
+    </div>
+  </div>`;
+}
+function buildRoutine(){
+  document.getElementById('tradDay').innerHTML=TRAD_DAY.map(rtBlock).join('');
+  document.getElementById('ntDay').innerHTML=NTRAD_DAY.map(rtBlock).join('');
+  const SPLIT=[
+    {day:'Monday',focus:'Upper body push',detail:'Chest, shoulders, triceps — 45–60 min'},
+    {day:'Tuesday',focus:'Active recovery',detail:'30 min walk — trading day'},
+    {day:'Wednesday',focus:'Lower body',detail:'Legs, glutes, core — 45–60 min'},
+    {day:'Thursday',focus:'Active recovery',detail:'30 min walk — trading day'},
+    {day:'Friday',focus:'Upper body pull',detail:'Back, biceps, core — 45–60 min'},
+    {day:'Saturday',focus:'Full body / cardio',detail:'60 min circuit or run'},
+    {day:'Sunday',focus:'Complete rest',detail:'Recovery. Meal prep. Plan the week.'},
+  ];
+  document.getElementById('trainSplit').innerHTML=SPLIT.map(d=>`<div class="sr"><div><div class="sr-lbl">${d.day}</div><div style="font-size:10px;color:var(--text3)">${d.detail}</div></div><div style="font-size:11px;color:var(--text);text-align:right">${d.focus}</div></div>`).join('');
+  document.getElementById('nutri').innerHTML=`
+    <div class="sr"><span class="sr-lbl">Water daily</span><span class="sr-val">2.5L minimum</span></div>
+    <div class="sr"><span class="sr-lbl">Wake water</span><span class="sr-val">500ml immediately</span></div>
+    <div class="sr"><span class="sr-lbl">Sleep target</span><span class="sr-val">10pm → 4am</span></div>
+    <div class="sr"><span class="sr-lbl">Protein</span><span class="sr-val">Every meal</span></div>
+    <div class="sr"><span class="sr-lbl">Eliminate</span><span style="font-size:11px;color:var(--red)">Sugar, alcohol, junk</span></div>
+    <div class="sr"><span class="sr-lbl">Caffeine cutoff</span><span class="sr-val">12pm max</span></div>
+    <div class="sr"><span class="sr-lbl">Screens off</span><span class="sr-val">9:30pm</span></div>`;
+}
+
+// ═══════════ SECTION LOADER ═══════════
+function loadSection(id){
+  if(id==='accounts')loadAccounts();
+  if(id==='journal')loadTrades();
+  if(id==='backtest')loadBacktests();
+  if(id==='books')loadBooks();
+}
+async function refreshAll(){
+  Object.keys(loaded).forEach(k=>delete loaded[k]);
+  loadAccounts();loadTrades();
+}
+
+// ═══════════ PWA — CORRECT IMPLEMENTATION ═══════════
+let deferredPrompt = null;
+
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  // Show banner after 3 seconds
+  setTimeout(() => document.getElementById('pwaBanner').classList.add('show'), 3000);
+});
+
+window.addEventListener('appinstalled', () => {
+  deferredPrompt = null;
+  document.getElementById('pwaBanner').classList.remove('show');
+  console.log('Joshua OS installed successfully');
+});
+
+function installPWA() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(choice => {
+      deferredPrompt = null;
+      document.getElementById('pwaBanner').classList.remove('show');
+    });
+  } else {
+    alert(
+      'To install Joshua OS:\n\n' +
+      '📱 iPhone/iPad:\n   Tap Share (□↑) → "Add to Home Screen"\n\n' +
+      '🤖 Android Chrome:\n   Tap menu (⋮) → "Add to Home Screen"\n\n' +
+      '💻 Chrome Desktop:\n   Click the ⊕ icon in the address bar\n\n' +
+      '🦊 Firefox Desktop:\n   Click the house icon in the address bar'
+    );
+  }
+}
+
+// Register the REAL service worker from /sw.js
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => {
+        console.log('✅ Joshua OS SW registered, scope:', reg.scope);
+      })
+      .catch(err => {
+        console.warn('⚠️ SW registration failed:', err);
+      });
+  });
+}
+
+// ═══════════ INIT ═══════════
+// ═══════════ HOURLY LOG ═══════════
+const HOURS=[
+  '4:00am','5:00am','6:00am','7:00am','8:00am','9:00am','10:00am','11:00am',
+  '12:00pm','1:00pm','2:00pm','3:00pm','4:00pm','5:00pm','6:00pm','7:00pm',
+  '8:00pm','9:00pm','9:30pm'
+];
+
+const HOUR_HINTS={
+  '4:00am':'Wake up, water, silence, morning journal',
+  '5:00am':'Physical training / morning routine',
+  '6:00am':'Pre-market analysis / backtesting',
+  '7:00am':'London Open — trading window',
+  '8:00am':'Trading / monitoring open trades',
+  '9:00am':'Trading / monitoring open trades',
+  '10:00am':'Business work / deep work block',
+  '11:00am':'Business work / content creation',
+  '12:00pm':'Midday meal / rest',
+  '1:00pm':'Business work / learning',
+  '2:00pm':'Business work / Python learning',
+  '3:00pm':'Post-trade review and journal',
+  '4:00pm':'Deep work — business tasks',
+  '5:00pm':'Business / personal tasks',
+  '6:00pm':'Personal time / family',
+  '7:00pm':'Evening reading',
+  '8:00pm':'Reading / light work',
+  '9:00pm':'Wind down / review day',
+  '9:30pm':'Shutdown — phone away, sleep prep',
+};
+
+function buildHourlyGrid(){
+  const today=new Date().toDateString();
+  const saved=JSON.parse(localStorage.getItem('hourly_'+today)||'{}');
+  const grid=document.getElementById('hourlyGrid');
+  if(!grid)return;
+  grid.innerHTML=HOURS.map(h=>{
+    const val=saved[h]||'';
+    return`<div style="background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);padding:10px 12px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold);font-weight:500">${h}</span>
+        ${val?'<span style="font-size:9px;color:var(--green)">✓ Logged</span>':'<span style="font-size:9px;color:var(--text3)">Empty</span>'}
+      </div>
+      <textarea
+        data-hour="${h}"
+        placeholder="${HOUR_HINTS[h]||'What did you do this hour?'}"
+        style="width:100%;background:var(--bg4);border:1px solid var(--border2);border-radius:6px;padding:7px 9px;color:var(--text);font-size:11px;font-family:'Inter',sans-serif;resize:none;height:60px;outline:none;line-height:1.5"
+        oninput="autoSaveHour(this,'${h}')"
+      >${val}</textarea>
+    </div>`;
+  }).join('');
+}
+
+function autoSaveHour(el,hour){
+  const today=new Date().toDateString();
+  const saved=JSON.parse(localStorage.getItem('hourly_'+today)||'{}');
+  saved[hour]=el.value;
+  localStorage.setItem('hourly_'+today,JSON.stringify(saved));
+}
+
+function saveHourlyLog(){
+  const today=new Date().toDateString();
+  const saved={};
+  document.querySelectorAll('[data-hour]').forEach(el=>{
+    if(el.value.trim())saved[el.tagName==='TEXTAREA'?el.dataset.hour:el.dataset.hour]=el.value.trim();
+  });
+  localStorage.setItem('hourly_'+today,JSON.stringify(saved));
+  showToast('Hourly log saved ✓');
+  buildHourlyGrid();
+}
+
+function clearHourlyLog(){
+  if(!confirm('Clear all hourly entries for today?'))return;
+  const today=new Date().toDateString();
+  localStorage.removeItem('hourly_'+today);
+  buildHourlyGrid();
+}
+
+function getHourlySummary(){
+  const today=new Date().toDateString();
+  const saved=JSON.parse(localStorage.getItem('hourly_'+today)||'{}');
+  const filled=Object.entries(saved).filter(([,v])=>v.trim());
+  if(!filled.length)return'No hourly log entries for today.';
+  return filled.map(([h,v])=>`${h}: ${v}`).join('\n');
+}
+
+// 9pm auto summary check
+function check9pmSummary(){
+  const now=new Date();
+  const h=now.getHours(),m=now.getMinutes();
+  const today=now.toDateString();
+  const lastSummary=localStorage.getItem('last_auto_summary');
+  // Trigger at 9pm (21:00) if not already done today
+  if(h===21&&m<5&&lastSummary!==today){
+    localStorage.setItem('last_auto_summary',today);
+    // Show notification
+    if(confirm('🌙 It\'s 9pm — time for your evening summary! Would you like AI to analyse your day now?')){
+      // Navigate to notes
+      const notesNav=document.querySelector('.nav-i[onclick*=\'notes\']');
+      if(notesNav)go('notes',notesNav);
+      setTimeout(()=>analyseDay(),500);
+    }
+  }
+  // Show next summary time
+  const nextEl=document.getElementById('nextSummaryTime');
+  if(nextEl){
+    if(h<21){
+      const hoursLeft=21-h;
+      const minsLeft=60-m;
+      nextEl.textContent=`Auto-analysis in ~${hoursLeft}h ${minsLeft>0?minsLeft+'m':''}`;
+    } else {
+      nextEl.textContent=lastSummary===today?'Auto-analysis done today ✓':'';
+    }
+  }
+}
+// Check every minute
+setInterval(check9pmSummary,60000);
+
+// ═══════════ AI NOTES & ANALYSIS ═══════════
+function buildNotes(){
+  loadTodayNote();
+  renderPastNotes();
+  updateTaskSummary();
+  buildHourlyGrid();
+  check9pmSummary();
+}
+
+function saveNote(){
+  const note=document.getElementById('dailyNote').value.trim();
+  if(!note)return;
+  const today=new Date().toDateString();
+  const notes=JSON.parse(localStorage.getItem('daily_notes')||'{}');
+  notes[today]={note,time:new Date().toLocaleTimeString(),tasks:getTodayTasks()};
+  localStorage.setItem('daily_notes',JSON.stringify(notes));
+  renderPastNotes();
+  showToast('Note saved ✓');
+}
+
+function loadTodayNote(){
+  const today=new Date().toDateString();
+  const notes=JSON.parse(localStorage.getItem('daily_notes')||'{}');
+  const el=document.getElementById('dailyNote');
+  if(el&&notes[today])el.value=notes[today].note||'';
+  updateTaskSummary();
+}
+
+function getTodayTasks(){
+  const today=new Date().toDateString();
+  const saved=JSON.parse(localStorage.getItem('dc_'+today)||'{}');
+  return DCTASKS.map((t,i)=>({task:t,done:saved[i]||false}));
+}
+
+function updateTaskSummary(){
+  const el=document.getElementById('noteTaskSummary');
+  if(!el)return;
+  const tasks=getTodayTasks();
+  const done=tasks.filter(t=>t.done);
+  const pending=tasks.filter(t=>!t.done);
+  let h=`<div style="margin-bottom:8px"><span style="color:var(--green)">${done.length}/${tasks.length} tasks completed today</span></div>`;
+  if(done.length)h+=done.map(t=>`<div style="color:var(--green);margin-bottom:3px">✓ ${t.task}</div>`).join('');
+  if(pending.length)h+=`<div style="margin-top:8px;color:var(--text3);font-size:10px">Pending:</div>`+pending.map(t=>`<div style="color:var(--text3);margin-bottom:3px">○ ${t.task}</div>`).join('');
+  el.innerHTML=h;
+}
+
+function renderPastNotes(){
+  const el=document.getElementById('pastNotes');
+  if(!el)return;
+  const notes=JSON.parse(localStorage.getItem('daily_notes')||'{}');
+  const keys=Object.keys(notes).sort((a,b)=>new Date(b)-new Date(a)).slice(0,10);
+  if(!keys.length){el.innerHTML='<div style="padding:20px;text-align:center;color:var(--text3)">No past notes yet. Start writing your daily journal.</div>';return;}
+  el.innerHTML=keys.map(k=>{
+    const n=notes[k];
+    const done=n.tasks?n.tasks.filter(t=>t.done).length:0;
+    const total=n.tasks?n.tasks.length:9;
+    return`<div style="padding:12px 0;border-bottom:1px solid var(--border);cursor:pointer" onclick="loadNote('${k}')">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+        <div style="font-size:12px;font-weight:500;color:var(--text)">${k}</div>
+        <div style="font-size:10px;color:var(--green)">${done}/${total} tasks</div>
+      </div>
+      <div style="font-size:11px;color:var(--text3);line-height:1.5">${(n.note||'').substring(0,120)}${(n.note||'').length>120?'…':''}</div>
+    </div>`;
+  }).join('');
+}
+
+function loadNote(dateKey){
+  const notes=JSON.parse(localStorage.getItem('daily_notes')||'{}');
+  const n=notes[dateKey];
+  if(!n)return;
+  const el=document.getElementById('dailyNote');
+  if(el)el.value=n.note||'';
+}
+
+async function analyseDay(){
+  const note=document.getElementById('dailyNote').value.trim();
+  const tasks=getTodayTasks();
+  const doneTasks=tasks.filter(t=>t.done).map(t=>t.task);
+  const pendingTasks=tasks.filter(t=>!t.done).map(t=>t.task);
+
+  if(!note&&doneTasks.length===0){
+    alert('Please write your daily note or complete some tasks first.');
+    return;
+  }
+
+  const btn=document.getElementById('analyseBtn');
+  btn.textContent='Analysing…';btn.disabled=true;
+
+  const aiEl=document.getElementById('aiAnalysis');
+  aiEl.innerHTML='<div class="ld"><div class="spin"></div>AI is analysing your day…</div>';
+
+  const today=new Date().toDateString();
+  const emotionScore=localStorage.getItem('em_score')||'Not rated';
+  const emotionDate=localStorage.getItem('em_date');
+  const emotion=emotionDate===today?emotionScore+'/10':'Not rated today';
+
+  const prompt=`You are Joshua's personal trading mentor, performance coach, and life advisor. Analyse his day based on the following data and provide a structured, honest, direct analysis.
+
+TRADER PROFILE:
+- Forex swing trader managing prop firm capital
+- Current accounts: $100k funded (live), $100k challenge Phase 1, $15k challenge
+- Goal: Scale to $1.2M funded capital in 6 months
+- Trading style: A+ setups only, 1:4 RR, 0.5% risk per trade
+- Known weaknesses: overtrading, revenge trading, Monday/Friday entries, entering early
+
+TODAY'S DATA:
+Date: ${today}
+Emotional state rating: ${emotion}
+Tasks completed (${doneTasks.length}/${tasks.length}): ${doneTasks.join(', ')||'None'}
+Tasks not completed: ${pendingTasks.join(', ')||'None'}
+Daily journal entry: "${note||'No journal entry written'}"
+
+Provide your analysis in this exact structure:
+
+## Overall Day Score: [X/10]
+
+## What You Did Well Today
+[List 2-4 specific strengths from today's data. Be specific, not generic.]
+
+## Weaknesses & Red Flags
+[List any concerning patterns, missed habits, or behavioral red flags. Be direct and honest.]
+
+## Trading Discipline Assessment
+[Assess their trading discipline for today based on the journal and tasks]
+
+## Business & Growth Progress
+[Assess their business building and personal development today]
+
+## Tomorrow's Priority Focus
+[Give 1-3 specific, actionable priorities for tomorrow based on today's gaps]
+
+## Coach's Message
+[One powerful, direct message — not motivational fluff. Something Joshua needs to hear today.]
+
+Be direct, analytical, and honest. Do not be generic. Reference specific things from their data.`;
+
+  try{
+    const response=await fetch('/.netlify/functions/analyse',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({prompt})
+    });
+    if(!response.ok){
+      const err=await response.text().catch(()=>'');
+      throw new Error('Server error '+response.status+': '+err);
+    }
+    const data=await response.json();
+    if(data.error)throw new Error(data.error);
+    const text=data.content?.[0]?.text||'Analysis failed. Please try again.';
+    renderAnalysis(text);
+    // Auto-save note after analysis
+    saveNote();
+    // Schedule auto analysis if all tasks done
+  }catch(e){
+    console.error('Analysis error:',e);
+    aiEl.innerHTML=`<div style="padding:20px;text-align:center;color:var(--red);font-size:12px;line-height:1.8">
+      <div style="font-size:14px;margin-bottom:8px">⚠️ Analysis Failed</div>
+      <div style="color:var(--text2)">${e.message||'Unknown error'}</div>
+      <div style="margin-top:10px;font-size:10px;color:var(--text3)">Make sure GROQ_API_KEY is set in Vercel → Project Settings → Environment Variables, then redeploy.</div>
+    </div>`;
+  }
+
+  btn.textContent='🧠 Analyse My Day';btn.disabled=false;
+}
+
+function renderAnalysis(text){
+  const el=document.getElementById('aiAnalysis');
+  if(!el)return;
+  // Convert markdown to HTML
+  let html=text
+    .replace(/## (.*?)\n/g,'<div style="font-size:13px;font-weight:600;color:var(--gold);margin:14px 0 6px">$1</div>')
+    .replace(/\*\*(.*?)\*\*/g,'<strong style="color:var(--text)">$1</strong>')
+    .replace(/\n- /g,'<div style="display:flex;gap:6px;margin-bottom:4px"><span style="color:var(--gold);flex-shrink:0">•</span><span>')
+    .replace(/\n\n/g,'</span></div><br>')
+    .replace(/\n/g,'</span></div>');
+  el.innerHTML=`<div style="font-size:12px;color:var(--text2);line-height:1.7">${html}</div>
+    <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);font-size:10px;color:var(--text3)">
+      Analysis generated at ${new Date().toLocaleTimeString()} · Powered by Groq AI
+    </div>`;
+  // Save analysis
+  const today=new Date().toDateString();
+  const notes=JSON.parse(localStorage.getItem('daily_notes')||'{}');
+  if(notes[today])notes[today].analysis=text;
+  localStorage.setItem('daily_notes',JSON.stringify(notes));
+}
+
+// Auto analyse when all daily tasks are completed
+function checkAutoAnalyse(){
+  const tasks=getTodayTasks();
+  const allDone=tasks.every(t=>t.done);
+  if(allDone){
+    const today=new Date().toDateString();
+    const notes=JSON.parse(localStorage.getItem('daily_notes')||'{}');
+    if(!notes[today]?.analysis){
+      // All tasks done and no analysis yet — auto trigger
+      setTimeout(()=>{
+        if(confirm('All daily tasks complete! Would you like AI to analyse your day?')){
+          go('notes',document.querySelector('.nav-i[onclick*="notes"]'));
+          analyseDay();
+        }
+      },500);
+    }
+  }
+}
+
+// Toast notification
+function showToast(msg){
+  const t=document.createElement('div');
+  t.style.cssText='position:fixed;bottom:80px;right:20px;background:var(--bg2);border:1px solid var(--borderg);color:var(--gold);padding:10px 16px;border-radius:var(--r);font-size:12px;z-index:400;animation:fi .3s ease';
+  t.textContent=msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),2500);
+}
+
+
+// ═══════════ CHALLENGE TRACKER ═══════════
+const CH_ACCOUNTS = [
+  {name:'$100K GFT — Acc 1', weeklyTarget:2000, startBalance:100000},
+  {name:'$100K GFT — Acc 2', weeklyTarget:2000, startBalance:100000},
+  {name:'$15K GFT',          weeklyTarget:600,  startBalance:15000},
+];
+const PHASE_LABELS = ['', 'Phase 1 Passed', 'Phase 2 Passed', '🏦 Funded'];
+
+function getChallengeData(){return JSON.parse(localStorage.getItem('challenge_data')||JSON.stringify({accounts:[{history:[]},{history:[]},{history:[]}],phases:[0,0,0]}));}
+function saveChallengeData(d){localStorage.setItem('challenge_data',JSON.stringify(d));}
+
+function openChallengeModal(){openModal('modalChallenge');}
+
+function saveChallengeWeek(){
+  const acc=parseInt(document.getElementById('chAccSelect').value);
+  const week=document.getElementById('chWeekInput').value.trim();
+  const pnl=parseFloat(document.getElementById('chPnlInput').value)||0;
+  const bal=parseFloat(document.getElementById('chBalInput').value)||0;
+  if(!week||!pnl)return alert('Please enter a week label and P&L.');
+  const d=getChallengeData();
+  d.accounts[acc].history.push({week,pnl,bal,date:new Date().toISOString()});
+  saveChallengeData(d);
+  document.getElementById('chWeekInput').value='';
+  document.getElementById('chPnlInput').value='';
+  document.getElementById('chBalInput').value='';
+  closeModal('modalChallenge');
+  buildChallengeSection();
+  buildAccChartLabels();
+  showToast('Week logged ✅');
+}
+
+function setPhase(accIdx, phase){
+  const d=getChallengeData();
+  const cur=d.phases[accIdx]||0;
+  d.phases[accIdx]= cur===phase ? phase-1 : phase;
+  saveChallengeData(d);
+  buildChallengeSection();
+  showToast(PHASE_LABELS[d.phases[accIdx]]||'Status updated');
+}
+
+function buildChallengeSection(){
+  const d=getChallengeData();
+  CH_ACCOUNTS.forEach((acc,i)=>{
+    const hist=d.accounts[i].history||[];
+    const latestBal=hist.length?hist[hist.length-1].bal:acc.startBalance;
+    const thisWeek=hist.length?hist[hist.length-1].pnl:0;
+    const prog=Math.min((thisWeek/acc.weeklyTarget)*100,100).toFixed(0);
+
+    const balEl=document.getElementById('ch'+(i+1)+'Balance');
+    const progEl=document.getElementById('ch'+(i+1)+'Prog');
+    if(balEl)balEl.textContent='$'+latestBal.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+    if(progEl)progEl.style.width=Math.max(prog,0)+'%';
+
+    // Phase status
+    const phase=d.phases[i]||0;
+    const psEl=document.getElementById('ch'+(i+1)+'PhaseStatus');
+    if(psEl){
+      const labels=['Challenge Active','✅ Phase 1 Passed','✅ Phase 2 Passed','🏦 FUNDED'];
+      const colors=['var(--amber)','var(--gold)','var(--gold)','var(--green)'];
+      psEl.innerHTML=`<span style="font-size:14px;font-weight:700;color:${colors[phase]}">${labels[phase]}</span>`;
+    }
+
+    // History table
+    const histEl=document.getElementById('chHist'+i);
+    if(histEl){
+      if(!hist.length){histEl.innerHTML='<div style="padding:20px;text-align:center;color:var(--text3)">No weeks logged yet.</div>';return;}
+      let h='<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Week</th><th>P&L</th><th>Balance</th><th>vs Target</th><th></th></tr></thead><tbody>';
+      hist.forEach((w,wi)=>{
+        const hit=w.pnl>=acc.weeklyTarget;
+        const diff=w.pnl-acc.weeklyTarget;
+        h+=`<tr>
+          <td style="font-size:11px">${w.week}</td>
+          <td style="color:${w.pnl>=0?'var(--green)':'var(--red)'};font-family:'JetBrains Mono',monospace">${w.pnl>=0?'+':''}$${Math.abs(w.pnl).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</td>
+          <td style="font-family:'JetBrains Mono',monospace;font-size:10px">$${w.bal.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</td>
+          <td><span class="bdg ${hit?'bdg-g':'bdg-r'}">${hit?'✅ Hit':'❌ '+(diff<0?'-$'+Math.abs(diff).toFixed(0):'')}</span></td>
+          <td><button class="btn btn-sm btn-red" onclick="delChallengeWeek(${i},${wi})">✕</button></td>
+        </tr>`;
+      });
+      h+='</tbody></table></div>';
+      histEl.innerHTML=h;
+    }
+  });
+}
+
+function delChallengeWeek(accIdx,wIdx){
+  if(!confirm('Remove this week entry?'))return;
+  const d=getChallengeData();
+  d.accounts[accIdx].history.splice(wIdx,1);
+  saveChallengeData(d);
+  buildChallengeSection();
+}
+
+// ═══════════ WITHDRAWALS ═══════════
+function getWithdrawals(){return JSON.parse(localStorage.getItem('withdrawals')||'[]');}
+function saveWithdrawals(w){localStorage.setItem('withdrawals',JSON.stringify(w));}
+
+function openWithdrawModal(){
+  document.getElementById('wDateInput').valueAsDate=new Date();
+  openModal('modalWithdraw');
+}
+
+function saveWithdrawal(){
+  const acc=document.getElementById('wAccSelect').value;
+  const amount=parseFloat(document.getElementById('wAmountInput').value)||0;
+  const date=document.getElementById('wDateInput').value;
+  const note=document.getElementById('wNoteInput').value.trim();
+  if(!amount||!date)return alert('Please enter amount and date.');
+
+  // Subtract from challenge balance
+  const accIdx=['$100K GFT — Acc 1','$100K GFT — Acc 2','$15K GFT'].indexOf(acc);
+  if(accIdx>=0){
+    const d=getChallengeData();
+    const hist=d.accounts[accIdx].history;
+    if(hist.length){
+      hist[hist.length-1].bal=Math.max(0,(hist[hist.length-1].bal||0)-amount);
+      saveChallengeData(d);
+      buildChallengeSection();
+    }
+  }
+
+  const ws=getWithdrawals();
+  ws.push({acc,amount,date,note,id:Date.now(),status:'Completed'});
+  saveWithdrawals(ws);
+  document.getElementById('wAmountInput').value='';
+  document.getElementById('wNoteInput').value='';
+  closeModal('modalWithdraw');
+  buildWithdrawals();
+  showToast('Withdrawal logged 💸');
+}
+
+function buildWithdrawals(){
+  const ws=getWithdrawals();
+  const listEl=document.getElementById('wList');
+  const totalEl=document.getElementById('wTotalAll');
+  const pendEl=document.getElementById('wPending');
+  const monthEl=document.getElementById('wThisMonth');
+
+  const total=ws.reduce((s,w)=>s+w.amount,0);
+  const now=new Date();
+  const monthStart=new Date(now.getFullYear(),now.getMonth(),1);
+  const monthTotal=ws.filter(w=>new Date(w.date)>=monthStart).reduce((s,w)=>s+w.amount,0);
+  const pending=ws.filter(w=>w.status==='Pending').length;
+
+  if(totalEl)totalEl.textContent='$'+total.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+  if(pendEl)pendEl.textContent=pending;
+  if(monthEl)monthEl.textContent='$'+monthTotal.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+
+  if(!ws.length){if(listEl)listEl.innerHTML='<div style="padding:30px;text-align:center;color:var(--text3)">No withdrawals logged yet.</div>';return;}
+  const sorted=[...ws].sort((a,b)=>new Date(b.date)-new Date(a.date));
+  let h='<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Date</th><th>Account</th><th>Amount</th><th>Note</th><th>Status</th><th></th></tr></thead><tbody>';
+  sorted.forEach((w,i)=>{
+    const realIdx=ws.findIndex(x=>x.id===w.id);
+    h+=`<tr>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:10px">${w.date}</td>
+      <td style="font-size:10px;color:var(--text3)">${w.acc}</td>
+      <td style="color:var(--green);font-family:'JetBrains Mono',monospace">$${w.amount.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</td>
+      <td style="font-size:10px;color:var(--text2)">${w.note||'—'}</td>
+      <td><span class="bdg bdg-g">${w.status}</span></td>
+      <td><button class="btn btn-sm btn-red" onclick="delWithdrawal(${realIdx})">✕</button></td>
+    </tr>`;
+  });
+  h+='</tbody></table></div>';
+  if(listEl)listEl.innerHTML=h;
+}
+
+function delWithdrawal(i){
+  if(!confirm('Remove this withdrawal?'))return;
+  const ws=getWithdrawals();
+  ws.splice(i,1);
+  saveWithdrawals(ws);
+  buildWithdrawals();
+}
+
+// ═══════════ ACCOUNT CHARTS ═══════════
+let _accChartInstance=null;
+let _selAccChart=-1;
+
+function buildAccChartLabels(){
+  const d=getChallengeData();
+  CH_ACCOUNTS.forEach((acc,i)=>{
+    const hist=d.accounts[i].history||[];
+    const bal=hist.length?hist[hist.length-1].bal:acc.startBalance;
+    const el=document.getElementById('accChartBal'+i);
+    if(el)el.textContent='$'+bal.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+  });
+  if(_selAccChart>=0)renderAccChart(_selAccChart);
+}
+
+function selectAccChart(idx){
+  _selAccChart=idx;
+  document.querySelectorAll('[id^="accChartBtn"]').forEach((el,i)=>{
+    el.style.borderColor=i===idx?'var(--gold)':'transparent';
+  });
+  renderAccChart(idx);
+}
+
+function renderAccChart(idx){
+  const d=getChallengeData();
+  const hist=d.accounts[idx].history||[];
+  const titleEl=document.getElementById('accChartTitle');
+  const emptyEl=document.getElementById('accChartEmpty');
+  const canvas=document.getElementById('accChartCanvas');
+
+  if(titleEl)titleEl.textContent=CH_ACCOUNTS[idx].name+' — Equity Curve';
+
+  if(!hist.length){
+    if(emptyEl)emptyEl.style.display='block';
+    if(canvas)canvas.style.display='none';
+    return;
+  }
+  if(emptyEl)emptyEl.style.display='none';
+  if(canvas)canvas.style.display='block';
+
+  const labels=hist.map(w=>w.week);
+  const data=hist.map(w=>w.bal);
+  const pnls=hist.map(w=>w.pnl);
+
+  if(_accChartInstance){_accChartInstance.destroy();_accChartInstance=null;}
+
+  const ctx=canvas.getContext('2d');
+  const grad=ctx.createLinearGradient(0,0,0,canvas.height*4);
+  grad.addColorStop(0,'rgba(201,168,76,0.35)');
+  grad.addColorStop(1,'rgba(201,168,76,0.02)');
+
+  _accChartInstance=new Chart(ctx,{
+    type:'line',
+    data:{
+      labels,
+      datasets:[{
+        label:'Balance',
+        data,
+        borderColor:'#C9A84C',
+        backgroundColor:grad,
+        borderWidth:2,
+        pointBackgroundColor:pnls.map(p=>p>=0?'#3dcc8a':'#e05555'),
+        pointRadius:5,
+        tension:0.3,
+        fill:true,
+      }]
+    },
+    options:{
+      responsive:true,
+      plugins:{
+        legend:{display:false},
+        tooltip:{callbacks:{label:ctx=>'$'+ctx.raw.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}}
+      },
+      scales:{
+        x:{ticks:{color:'#504d68',font:{size:10}},grid:{color:'#1e1d28'}},
+        y:{ticks:{color:'#504d68',font:{size:10},callback:v=>'$'+Number(v).toLocaleString()},grid:{color:'#1e1d28'}}
+      }
+    }
+  });
+}
+
+// ═══════════ INCOME STREAMS (UPDATED) ═══════════
+const DEF_INCOME=[
+  {n:'Prop Firm Payouts',target:5000,actual:0},
+  {n:'Contour Academy',target:3000,actual:0},
+  {n:'AI / Content',target:2000,actual:0},
+  {n:'Agricultural Business',target:1000,actual:0},
+  {n:'Marketing Hub',target:1500,actual:0},
+];
+function getIncomeStreams(){return JSON.parse(localStorage.getItem('income_streams')||JSON.stringify(DEF_INCOME));}
+function saveIncomeStreams(s){localStorage.setItem('income_streams',JSON.stringify(s));}
+function getIncomeGoal(){return parseFloat(localStorage.getItem('income_goal'))||0;}
+function saveIncomeGoal(){
+  const val=parseFloat(document.getElementById('incomeGoalInput').value)||0;
+  localStorage.setItem('income_goal',val);
+  document.getElementById('incomeGoalDisplay').textContent=val?'Goal: $'+val.toLocaleString()+'/mo':'';
+  buildIncomeSection();
+  showToast('Income goal saved ✅');
+}
+function saveIncomeStream(){
+  const n=document.getElementById('incNameInput').value.trim();
+  const target=parseFloat(document.getElementById('incTargetInput').value)||0;
+  const actual=parseFloat(document.getElementById('incActualInput').value)||0;
+  if(!n)return alert('Please enter a name.');
+  const s=getIncomeStreams();
+  s.push({n,target,actual});
+  saveIncomeStreams(s);
+  document.getElementById('incNameInput').value='';
+  document.getElementById('incTargetInput').value='';
+  document.getElementById('incActualInput').value='';
+  closeModal('modalIncome');
+  buildIncomeSection();
+  showToast('Income stream added ✅');
+}
+function delIncomeStream(i){
+  if(!confirm('Remove this income stream?'))return;
+  const s=getIncomeStreams();
+  s.splice(i,1);
+  saveIncomeStreams(s);
+  buildIncomeSection();
+}
+function buildIncomeSection(){
+  const el=document.getElementById('incomeEl');if(!el)return;
+  const streams=getIncomeStreams();
+  const goal=getIncomeGoal();
+  const goalDisp=document.getElementById('incomeGoalDisplay');
+  if(goalDisp&&goal)goalDisp.textContent='Goal: $'+goal.toLocaleString()+'/mo';
+  const totalTarget=streams.reduce((s,i)=>s+(i.target||0),0);
+  const totalActual=streams.reduce((s,i)=>s+(i.actual||0),0);
+  let h=streams.map((inc,i)=>`
+    <div class="inc-row">
+      <span style="font-size:12px;color:var(--text2)">${inc.n}</span>
+      <span style="font-size:10px;color:var(--text3)">Target: $${(inc.target||0).toLocaleString()}/mo</span>
+      <span style="font-size:12px;font-family:'JetBrains Mono',monospace;color:${inc.actual>0?'var(--green)':'var(--text3)'}">${inc.actual>0?'+$'+inc.actual.toLocaleString():'—'}</span>
+      <button class="btn btn-sm btn-red" onclick="delIncomeStream(${i})" style="padding:2px 7px;font-size:10px">✕</button>
+    </div>`).join('');
+  h+=`<div class="inc-row" style="border:none;padding-top:12px">
+    <span style="font-size:12px;color:var(--gold);font-weight:600">Monthly Total Target</span>
+    <span></span>
+    <span style="font-size:13px;color:var(--gold);font-family:'JetBrains Mono',monospace">$${totalTarget.toLocaleString()}</span>
+    <span></span>
+  </div>`;
+  if(goal){
+    const pct=Math.min((totalTarget/goal)*100,100).toFixed(0);
+    h+=`<div style="margin-top:10px">
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-bottom:4px"><span>Progress to expected income</span><span>${pct}%</span></div>
+      <div class="prog-track"><div class="prog-fill" style="width:${pct}%"></div></div>
+      <div style="font-size:10px;color:var(--text3);margin-top:4px">Expected: $${goal.toLocaleString()} / Current target: $${totalTarget.toLocaleString()}</div>
+    </div>`;
+  }
+  el.innerHTML=h;
+}
+
+// ═══════════ BACKTEST PATTERNS ═══════════
+function buildBtPatterns(bt){
+  const el=document.getElementById('btPatterns');
+  const bt100kEl=document.getElementById('bt100k');
+  if(!el||!bt||!bt.length){
+    if(el)el.innerHTML='<div class="card"><div style="padding:30px;text-align:center;color:var(--text3)">No backtest data to analyse patterns.</div></div>';
+    return;
+  }
+
+  // Filter $100K account backtests
+  const bt100k=bt.filter(r=>{
+    const acc=cleanN(gpAny(r,'Account')||'');
+    return acc.toLowerCase().includes('100k')||acc.toLowerCase().includes('100,000');
+  });
+  if(bt100kEl)bt100kEl.innerHTML=tradeTable(bt100k.length?bt100k:bt);
+
+  // Pattern analysis helpers
+  function winRate(rows){
+    if(!rows.length)return{wr:0,w:0,t:rows.length};
+    const w=rows.filter(r=>{const o=gpAny(r,'Outcome')||'';return o.toLowerCase().includes('profit')||o.toLowerCase().includes('win');});
+    return{wr:rows.length?(w.length/rows.length*100).toFixed(1):0,w:w.length,t:rows.length};
+  }
+
+  // By Confluence
+  const confMap={};
+  bt.forEach(r=>{const c=cleanN(gpAny(r,'Confluences')||'Other');if(!confMap[c])confMap[c]=[];confMap[c].push(r);});
+
+  // By Signal
+  const sigMap={};
+  bt.forEach(r=>{const s=cleanN(gpAny(r,'Entry Signal')||'Other');if(!sigMap[s])sigMap[s]=[];sigMap[s].push(r);});
+
+  // By Day
+  const dayMap={};
+  bt.forEach(r=>{const d=gpAny(r,'#Day')||'Unknown';if(!dayMap[d])dayMap[d]=[];dayMap[d].push(r);});
+
+  // By Session
+  const sessMap={};
+  bt.forEach(r=>{const s=cleanN(gpAny(r,'Session')||'Unknown');if(!sessMap[s])sessMap[s]=[];sessMap[s].push(r);});
+
+  // By Grade
+  const gradeMap={};
+  bt.forEach(r=>{const g=cleanN(gpAny(r,'Setup Grade')||'Unknown');if(!gradeMap[g])gradeMap[g]=[];gradeMap[g].push(r);});
+
+  function patternTable(map,title,minTrades=2){
+    const rows=Object.entries(map).filter(([_,rs])=>rs.length>=minTrades).map(([k,rs])=>{const{wr,w,t}=winRate(rs);return{k,wr:parseFloat(wr),w,t};}).sort((a,b)=>b.wr-a.wr);
+    if(!rows.length)return'';
+    let h=`<div class="sh" style="margin-bottom:10px"><div class="sh-title" style="font-size:15px">${title}</div><div class="sh-line"></div></div>
+      <div class="card" style="margin-bottom:14px"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Pattern</th><th>Trades</th><th>Wins</th><th>Win Rate</th><th>Rating</th></tr></thead><tbody>`;
+    rows.forEach(r=>{
+      const color=r.wr>=80?'var(--green)':r.wr>=60?'var(--amber)':'var(--red)';
+      const rating=r.wr>=80?'🔥 High Edge':r.wr>=60?'✅ Good':'⚠️ Avoid';
+      h+=`<tr>
+        <td style="font-size:11px;color:var(--text)">${r.k}</td>
+        <td style="font-family:'JetBrains Mono',monospace">${r.t}</td>
+        <td style="color:var(--green);font-family:'JetBrains Mono',monospace">${r.w}</td>
+        <td><span style="font-size:13px;font-weight:700;color:${color}">${r.wr}%</span></td>
+        <td><span class="bdg ${r.wr>=80?'bdg-g':r.wr>=60?'bdg-a':'bdg-r'}">${rating}</span></td>
+      </tr>`;
+    });
+    h+='</tbody></table></div></div>';
+    return h;
+  }
+
+  el.innerHTML=
+    patternTable(confMap,'🔷 Confluences — Win Rate by Pattern')+
+    patternTable(sigMap,'📍 Entry Signals — Win Rate')+
+    patternTable(dayMap,'📅 Day of Week — Win Rate')+
+    patternTable(sessMap,'🕐 Session — Win Rate')+
+    patternTable(gradeMap,'⭐ Setup Grade — Win Rate');
+}
+
+// ═══════════ CHART.JS LOADER ═══════════
+function loadChartJS(cb){
+  if(window.Chart){cb();return;}
+  const s=document.createElement('script');
+  s.src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js';
+  s.onload=cb;
+  document.head.appendChild(s);
+}
+
+// Override go() to init new sections
+const _origGo=window.go;
+
+function init(){
+  buildEmotion();
+  buildDC();
+  buildHabits();
+  buildGates();
+  buildRoadmap();
+  buildVision();
+  buildRoutine();
+  buildBiz();
+  buildNotes();
+  loadAccounts();
+  loadTrades();
+  buildChallengeSection();
+  buildWithdrawals();
+  buildIncomeSection();
+  buildAccChartLabels();
+  loadChartJS(()=>{ if(_selAccChart>=0)renderAccChart(_selAccChart); });
+  // Auto refresh every 10 minutes
+  setInterval(()=>{
+    refreshAll();
+    console.log('Auto-refreshed Notion data at',new Date().toLocaleTimeString());
+  },10*60*1000);
+}
+init();
+</script>
+</body>
+</html>

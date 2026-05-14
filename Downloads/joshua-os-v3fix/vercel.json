@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/.netlify/functions/analyse", "destination": "/api/analyse" },
+    { "source": "/.netlify/functions/notion", "destination": "/api/notion" }
+  ]
+}
